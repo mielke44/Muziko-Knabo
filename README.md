@@ -1,4 +1,4 @@
-# example-laravel-vuejs-vuetify
+# Start Laravel development/Hosting
 
 steps:
 
