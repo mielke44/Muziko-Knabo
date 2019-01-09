@@ -14,5 +14,4 @@
 Route::get('/', function () {
     return view('app');
 });
-
-Route::get('/{id}', 'Vuetify@jsonMessage');
+Route::post('/submit','Controller@Submit')->name('submit');
