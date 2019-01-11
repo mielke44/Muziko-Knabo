@@ -7,24 +7,24 @@
             <v-img src="https://i.imgur.com/R13SHZd.jpg">
                 <v-container class='ma-0 pa-0' fluid>
                         <section>
-                        <v-img @click="window.location='/'" src="https://i.imgur.com/6NltwwC.png" height="170" contain alt></v-img>
-                        <v-flex class="display-3 text-xs-center white--text">Your Music Soaring</v-flex>
+                        <v-img @click="window.location='/'" src="https://i.imgur.com/6NltwwC.png" height="650" contain alt></v-img>
+                        <v-flex  class="display-3 text-xs-center text">Your Music Soaring</v-flex>
                             <v-container class='pa-0'fluid>
                             <v-layout column wrap justify-center v-if="screen==0">
                                     <v-card tile color="transparent">
-                                            <v-card-title><v-flex v-if="screen==0" class="display-1 text-xs-center white--text">Our Services</v-flex></v-card-title>
+                                            <v-card-title><v-flex  class="display-1 text-xs-center white--text text">Our Services</v-flex></v-card-title>
                                             <v-layout row wrap>
                                                 <v-flex xs4 v-for='service in services'>
                                                     <v-container fluid fill-height>
-                                                        <v-card :color="service.color" :class="service.colortext" width="354" height="100%">
+                                                        <v-card color="rgb(0, 0, 0, 0.5)" width="354" height="100%">
                                                             <v-layout justify-space-between column fill-height>
                                                                 <v-flex>
-                                                                    <v-card-title primary-title>
-                                                                        <h3 class="headline ma-1">@{{service.title}}</h3>
+                                                                    <v-card-title class="white--text" primary-title>
+                                                                        <h3 class="headline ma-1 text">@{{service.title}}</h3>
                                                                     </v-card-title>
                                                                     <v-card-text>
                                                                         <v-img :src="service.img" aspect-ratio="2.5"></v-img>
-                                                                        <v-flex>@{{service.desc}}</v-flex>
+                                                                        <v-flex class="text2">@{{service.desc}}</v-flex>
                                                                     </v-card-text>
                                                                 </v-flex>
                                                                 <v-flex style='height:100px'>
@@ -32,13 +32,13 @@
                                                                         <v-flex>
                                                                             <v-divider></v-divider>
                                                                             <v-card-actions>
-                                                                                <v-btn color="blue darken-3" @click='linkopen(service.sc)' block>View Examples</v-btn>
+                                                                                <v-btn class="text-xs-center text" color="blue darken-3" @click='linkopen(service.sc)' outline round block>View Examples</v-btn>
                                                                             </v-card-actions>
                                                                         </v-flex>
                                                                     </v-layout>
                                                                 </v-flex>
                                                             </v-layout>
-                                                            </v-card>
+                                                        </v-card>
                                                     </v-container>
                                                 </v-flex>
                                             </v-layout>
@@ -50,14 +50,14 @@
                 <v-container class="pa-4 ma-0" v-if="screen=='services'" fluid>
                     <v-layout column wrap>
                         <v-flex>
-                            <v-card tile color="white" >
+                            <v-card tile color="rgb(255, 0, 0, 0.2)">
                                 <v-toolbar card color="blue darken-3">
-                                    <v-flex class="display-2 text-xs-left white--text">@{{scdet.title}}</v-flex>
+                                    <v-flex class="display-2 text-xs-left white--text text">@{{scdet.title}}</v-flex>
                                 </v-toolbar>
                                 <v-layout row wrap>
                                     <v-flex xs9>
                                         <template v-for='sample in scdet.samples'>
-                                            <v-flex xs6>@{{sample.name}}
+                                            <v-flex xs6 class="text">@{{sample.name}}
                                                 <v-btn fab dark color="blue" small>
                                                     <v-icon dark>play_arrow</v-icon>
                                                 </v-btn>
@@ -66,9 +66,9 @@
                                     </v-flex>
                                     <v-flex xs3>
                                         <v-container fill-height>
-                                            <v-flex >
+                                            <v-flex>
                                                 <v-img :src="scdet.img" width="220" height="100"></v-img>
-                                                <v-btn color="red" @click="popup=true" round>@{{scdet.submit}}</v-btn>
+                                                <v-btn class="text" color="blue" @click="popup=true" outline round>@{{scdet.submit}}</v-btn>
                                             </v-flex>  
                                         </v-container>
                                     </v-flex>
@@ -225,13 +225,13 @@
             getscdet: function(num){
                 switch (num){
                     case 1:
-                        this.scdet={title:'Song Writing', samples:this.getsamples(num), img:this.services[0].img_scr, submit:'Submit your music now!'};
+                        this.scdet={title:'Song Writing', samples:this.getsamples(num), img:this.services[0].img_scr, submit:'sign up for a free consultation'};
                         break;
                     case 2:
-                        this.scdet={title:'Production/Mixing', samples:this.getsamples(num), img:this.services[1].img_scr, submit:'Submit your music now!'};
+                        this.scdet={title:'Production/Mixing', samples:this.getsamples(num), img:this.services[1].img_scr, submit:'sign up for a free consultation'};
                         break;
                     case 3:
-                        this.scdet={title:'Song Critique', samples:this.getsamples(num), img:this.services[2].img_scr, submit:'Submit your music now!'};
+                        this.scdet={title:'Song Critique', samples:this.getsamples(num), img:this.services[2].img_scr, submit:'sign up for a free consultation'};
                         break;
                 }
             },
@@ -246,4 +246,36 @@
         }
     });
 </script>
+<style>
+.blur {
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+
+.text {
+    -webkit-text-stroke: 1px black;
+    color: white;
+    text-shadow:
+        3px 3px 0 #000,
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+.text2 {
+    -webkit-text-stroke: 0.1px black;
+    color: white;
+    text-shadow:
+        1px 1px 0 #000,
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+</style>
+
 @endsection
