@@ -36,5 +36,8 @@ class Controller extends BaseController
         });
         */
     }
+    public function Home(){
+        return view('/app');
+    }
 
 }
