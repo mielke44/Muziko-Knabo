@@ -11,7 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('app');
-});
+Route::get('/','Controller@home')->name('home');
 Route::post('/submit','Controller@Submit')->name('submit');
