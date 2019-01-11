@@ -7,7 +7,7 @@
             <v-img src="https://i.imgur.com/R13SHZd.jpg">
                 <v-container class='ma-0 pa-0' fluid>
                         <section>
-                        <v-img @click="window.location='/'" src="https://i.imgur.com/Q3Ssf5m.jpg" height="170" contain alt></v-img>
+                        <v-img @click="window.location='/'" src="https://i.imgur.com/6NltwwC.png" height="170" contain alt></v-img>
                         <v-flex class="display-3 text-xs-center white--text">Your Music Soaring</v-flex>
                             <v-container class='pa-0'fluid>
                             <v-layout column wrap justify-center v-if="screen==0">
