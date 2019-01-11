@@ -25,7 +25,7 @@ class Controller extends BaseController
             //'sender' => $r->email,
             //'service' => $r->service,
         );
-        $file->move('/Users/wilsonmielke/Muziko-Knabo/storage/app/User_music_samples',$file->getClientOriginalName());
+        $file->move('brunoberndt/SoirMusic/storage/app/User_music_samples',$file->getClientOriginalName());
         //Storage::put('User_music_samples', $file);
         /*
         Mail::send('mail',$data,

@@ -7,7 +7,7 @@
             <v-img src="https://i.imgur.com/R13SHZd.jpg">
                 <v-container class='ma-0 pa-0' fluid>
                         <section>
-                        <v-img @click="window.location='/'" src="https://i.imgur.com/6NltwwC.png" height="650" contain alt></v-img>
+                        <v-img @click="window.location='/'" src="https://i.imgur.com/6NltwwC.png" :height="logoheight" contain alt></v-img>
                         <v-flex  class="display-3 text-xs-center text">Your Music Soaring</v-flex>
                             <v-container class='pa-0'fluid>
                             <v-layout column wrap justify-center v-if="screen==0">
@@ -16,23 +16,23 @@
                                             <v-layout row wrap>
                                                 <v-flex xs4 v-for='service in services'>
                                                     <v-container fluid fill-height>
-                                                        <v-card color="rgb(0, 0, 0, 0.5)" width="354" height="100%">
+                                                        <v-card color="rgb(0,0,0,0.2)" width="354" height="100%">
                                                             <v-layout justify-space-between column fill-height>
                                                                 <v-flex>
-                                                                    <v-card-title class="white--text" primary-title>
-                                                                        <h3 class="headline ma-1 text">@{{service.title}}</h3>
+                                                                    <v-card-title primary-title>
+                                                                        <h3 class="headline align-center ma-1 text2">@{{service.title}}</h3>
                                                                     </v-card-title>
                                                                     <v-card-text>
-                                                                        <v-img :src="service.img" aspect-ratio="2.5"></v-img>
+                                                                        <v-img :src="service.img" aspect-ratio="3.0"></v-img>
                                                                         <v-flex class="text2">@{{service.desc}}</v-flex>
                                                                     </v-card-text>
                                                                 </v-flex>
-                                                                <v-flex style='height:100px'>
+                                                                <v-flex style="height:100px;">
                                                                     <v-layout align-end row fill-height>
                                                                         <v-flex>
                                                                             <v-divider></v-divider>
                                                                             <v-card-actions>
-                                                                                <v-btn class="text-xs-center text" color="blue darken-3" @click='linkopen(service.sc)' outline round block>View Examples</v-btn>
+                                                                                <v-btn class="text-xs-center text2" color="blue darken-3" @click='linkopen(service.sc);logoheight=350;' outline round block>View Examples</v-btn>
                                                                             </v-card-actions>
                                                                         </v-flex>
                                                                     </v-layout>
@@ -50,8 +50,8 @@
                 <v-container class="pa-4 ma-0" v-if="screen=='services'" fluid>
                     <v-layout column wrap>
                         <v-flex>
-                            <v-card tile color="rgb(255, 0, 0, 0.2)">
-                                <v-toolbar card color="blue darken-3">
+                            <v-card tile color="rgb(0, 0, 0, 0.2)">
+                                <v-toolbar card color="transparent">
                                     <v-flex class="display-2 text-xs-left white--text text">@{{scdet.title}}</v-flex>
                                 </v-toolbar>
                                 <v-layout row wrap>
@@ -68,13 +68,13 @@
                                         <v-container fill-height>
                                             <v-flex>
                                                 <v-img :src="scdet.img" width="220" height="100"></v-img>
-                                                <v-btn class="text" color="blue" @click="popup=true" outline round>@{{scdet.submit}}</v-btn>
+                                                <v-btn class="text2" color="blue" @click="popup=true" outline round>@{{scdet.submit}}</v-btn>
                                             </v-flex>  
                                         </v-container>
                                     </v-flex>
                                 </v-layout>
                                 <v-card-action class="text-xs-center">
-                                    <v-flex xs12 class='text-xs-center'><v-btn icon color='blue' @click="window.location='/'"><v-icon>home</v-icon></v-btn></v-flex>
+                                    <v-flex xs12 class='text-xs-center'><v-btn icon color='blue' @click="window.location='/';logoheight=650"><v-icon>home</v-icon></v-btn></v-flex>
                                 </v-card-action>
                             </v-card>
                         </v-flex>
@@ -141,6 +141,7 @@
         },
         data() {
             return {
+                logoheight:650,
                 file:'',
                 form: {name:'',songname:'',email:'',service:'',music:[]},
                 popup: false,
@@ -248,13 +249,11 @@
 </script>
 <style>
 .blur {
-    -webkit-filter: blur(5px);
-    -moz-filter: blur(5px);
-    -o-filter: blur(5px);
-    -ms-filter: blur(5px);
     filter: blur(5px);
 }
-
+.zeroblur{
+    filter: blur(0px);
+}
 .text {
     -webkit-text-stroke: 1px black;
     color: white;
