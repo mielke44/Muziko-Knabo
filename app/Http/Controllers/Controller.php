@@ -33,7 +33,7 @@ class Controller extends BaseController
             //$message->to('contact.brunorios@gmail.com');
             $message->to('wilson.mielke@gmail.com');
             $message->subject('Soir Music Request');
-            $message->attach('/home4/brunoberndt/public_html/brunoberndt/SoirMusic/storage/app/User_music_samples',$file->getClientOriginalNanem,['mime'=>$file->getClientMimeType()]);
+            $message->attach('/home4/brunoberndt/public_html/brunoberndt/SoirMusic/storage/app/User_music_samples',$file->getClientOriginalName(),['mime'=>$file->getClientMimeType()]);
         });//->attachFromStorage('/brunoberndt/SoirMusic/storage/app/User_music_samples',$file->getClientOriginalName(),['mime'=>$file->getClientMimeType()]);
         Storage::delete($file->getClientOriginalName());
     }
