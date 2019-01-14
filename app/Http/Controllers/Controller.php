@@ -29,14 +29,13 @@ class Controller extends BaseController
             'sender' =>' $r->email',
             'service' => '$r->service',
         );
-        //Storage::move($file->getClientOriginalName(),'brunoberndt/SoirMusic/storage/app/User_music_samples/'.$file->getClientOriginalName());
         $file->move('brunoberndt/SoirMusic/storage/app/User_music_samples/',$file->getClientOriginalName());
         
         Mail::send('mail',$data,
         function($message) use ($data) {
             $message->to('wilson.mielke@gmail.com');
             $message->subject('Soir Music Request');
-        })->attach('brunoberndt/SoirMusic/storage/app/User_music_samples/',['as' =>'UserSample'.$file->getClientOriginalExtension(), 'mime'=>$file->getClientMimeType()]);
+        })->attachFromStorage('brunoberndt/SoirMusic/storage/app/User_music_samples/',$file->getClientOriginalName(),['mime'=>$file->getClientMimeType()]);
         Storage::delete($file->getClientOriginalName());
     }
     public function Home(){
