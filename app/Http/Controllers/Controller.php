@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Http\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class Controller extends BaseController
 {
@@ -28,7 +29,8 @@ class Controller extends BaseController
             'sender' =>' $r->email',
             'service' => '$r->service',
         );
-        Storage::move($file->getClientOriginalName(),'brunoberndt/SoirMusic/storage/app/User_music_samples/'.$file->getClientOriginalName());
+        //Storage::move($file->getClientOriginalName(),'brunoberndt/SoirMusic/storage/app/User_music_samples/'.$file->getClientOriginalName());
+        $file->move('brunoberndt/SoirMusic/storage/app/User_music_samples/',$file->getClientOriginalName());
         
         Mail::send('mail',$data,
         function($message) use ($data) {
