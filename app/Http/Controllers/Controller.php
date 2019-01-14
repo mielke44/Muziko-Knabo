@@ -20,22 +20,21 @@ class Controller extends BaseController
         $file=$r->file('file');
         $data[] = array(
             'Header' => 'New Mail from Soir Music!',
-            // 'name' => $r->name,
-            // 'songname' => $r->songname,
-            // 'sender' => $r->email,
-            // 'service' => $r->service,
-            'name' => '$r->name',
-            'songname' => '$r->songname',
-            'sender' =>' $r->email',
-            'service' => '$r->service',
+            'name' => $r->name,
+            'songname' => $r->songname,
+            'sender' => $r->email,
+            'service' => $r->service,
         );
         $file->move('brunoberndt/SoirMusic/storage/app/User_music_samples/',$file->getClientOriginalName());
         
         Mail::send('mail',$data,
         function($message) use ($data) {
+            $message->from('noreplyservice@soirmusic.com','You got Mail from Soir music!');
+            //$message->to('contact.brunorios@gmail.com');
             $message->to('wilson.mielke@gmail.com');
             $message->subject('Soir Music Request');
-        })->attachFromStorage('brunoberndt/SoirMusic/storage/app/User_music_samples/',$file->getClientOriginalName(),['mime'=>$file->getClientMimeType()]);
+            $message->attach('/home4/brunoberndt/public_html/brunoberndt/SoirMusic/storage/app/User_music_samples',$file->getClientOriginalNanem,['mime'=>$file->getClientMimeType()]);
+        });//->attachFromStorage('/brunoberndt/SoirMusic/storage/app/User_music_samples',$file->getClientOriginalName(),['mime'=>$file->getClientMimeType()]);
         Storage::delete($file->getClientOriginalName());
     }
     public function Home(){
