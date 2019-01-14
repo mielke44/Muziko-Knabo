@@ -37,11 +37,5 @@ class Mail extends Mailable
     {
         return $this->from()
                     ->view();
-                    /*
-                    ->attach(public_path('/images').'/demo.jpg', [
-                            'as' => 'demo.jpg',
-                            'mime' => 'image/jpeg',
-                    ]);
-                    */
     }
 }
