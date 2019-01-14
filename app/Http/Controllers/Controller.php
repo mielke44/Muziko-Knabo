@@ -34,8 +34,8 @@ class Controller extends BaseController
         function($message) use ($data) {
             $message->to('wilson.mielke@gmail.com');
             $message->subject('Soir Music Request');
-        })->attach('brunoberndt/SoirMusic/storage/app/User_music_samples/'.$file->getclientoriginalname(),['as' =>'UserSample'.$file->getClientOriginalExtension(), 'mime'=>$file->getClientMimeType()]);
-        
+        })->attach('brunoberndt/SoirMusic/storage/app/User_music_samples/',['as' =>'UserSample'.$file->getClientOriginalExtension(), 'mime'=>$file->getClientMimeType()]);
+        Storage::delete($file->getClientOriginalName());
     }
     public function Home(){
         return view('/app');
