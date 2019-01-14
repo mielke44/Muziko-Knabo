@@ -28,12 +28,13 @@ class Controller extends BaseController
         $file->move('brunoberndt/SoirMusic/storage/app/User_music_samples/',$file->getClientOriginalName());
         
         Mail::send('mail',$data,
-        function($message) use ($data) {
+        function($message) use ($data, $file) {
             $message->from('noreplyservice@soirmusic.com','You got Mail from Soir music!');
             //$message->to('contact.brunorios@gmail.com');
             $message->to('wilson.mielke@gmail.com');
             $message->subject('Soir Music Request');
-        })->attach('/home4/brunoberndt/public_html/brunoberndt/SoirMusic/storage/app/User_music_samples',$data->songname);
+            $message->attach($file->getRealPath(),array('as'=>$file->getClientOriginalName(),'mime'=>$file->getMimeType()));
+        });
         Storage::delete($file->getClientOriginalName());
     }
     public function Home(){
