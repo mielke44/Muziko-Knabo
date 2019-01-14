@@ -28,7 +28,7 @@ class Controller extends BaseController
             'sender' =>' $r->email',
             'service' => '$r->service',
         );
-        Storage::move($file->getClientOriginalName(),'brunoberndt/SoirMusic/storage/app/User_music_samples/');
+        Storage::move($file->getClientOriginalName(),'brunoberndt/SoirMusic/storage/app/User_music_samples/'.$file->getClientOriginalName());
         
         Mail::send('mail',$data,
         function($message) use ($data) {
