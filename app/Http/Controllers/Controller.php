@@ -33,7 +33,7 @@ class Controller extends BaseController
             //$message->to('contact.brunorios@gmail.com');
             $message->to('wilson.mielke@gmail.com');
             $message->subject('Soir Music Request');
-            $message->attach($file->getRealPath(),array('as'=>$file->getClientOriginalName(),'mime'=>$file->getMimeType()));
+            $message->attach($file->getRealPath(),array('as'=>$file->getClientOriginalName()));
         });
         Storage::delete($file->getClientOriginalName());
     }
