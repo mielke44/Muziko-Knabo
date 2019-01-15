@@ -122,7 +122,7 @@
 @section('js')
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    new Vue({
+    app = new Vue({
         el: '#app',
         created() {
             this.$vuetify.theme = {
@@ -189,9 +189,6 @@
             }
         },
         methods: {
-            handleFileUpload(){
-                this.file = this.$refs.file.files[0];
-            },
             notify: function (text, color) {
                 this.snackbar_notify.text = text;
                 this.snackbar_notify.model = true;
