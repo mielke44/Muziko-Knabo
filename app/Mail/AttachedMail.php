@@ -18,17 +18,17 @@ class AttachedMail extends Mailable
      * @var Data
      */
     public $data;
-    public $attachmentFile;
-    public $attachmentPath;
+    public $fileName;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($data,$fileName)
     {
         $this->data= $data;
+        $this->fileName= $fileName;
     }
 
     /**
@@ -43,6 +43,6 @@ class AttachedMail extends Mailable
                     ->to('wilson.mielke@gmail.com')
                     ->subject('Soir Music Request')
                     ->view('mail',['data'=> $this->data])
-                    ->attachFromStorage('/storage/app');
+                    ->attachFromStorage('storage/app/', $this->fileName);
     }
 }
