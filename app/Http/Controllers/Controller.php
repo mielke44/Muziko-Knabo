@@ -28,14 +28,16 @@ class Controller extends BaseController
             'service' => $r->service,
         );
         $file->move('brunoberndt/SoirMusic/storage/app/User_music_samples/',$file->getClientOriginalName());
-        
-        print_r($file->getRealPath().'--->'.public_path());
-        Mail::send(new AttachedMail($data, $file, $file->getRealPath()));
+        $exists = Storage::get('brunoberndt/SoirMusic/storage/app/User_music_samples/');
+        print_r($file->getRealPath().'--->'.public_path().'|-----|'.$exists);
+        Mail::send(new AttachedMail($data, $file,'brunoberndt/SoirMusic/storage/app/User_music_samples/'));
         //Mail::send('mail',$data,
         //function($message) use ($data, $file) {
         //    $message->attach($file->getRealPath(),array('as'=>$file->getClientOriginalName()));
         //});
         Storage::delete($file->getClientOriginalName());
+
+        return json_encode(array('error'=>false, 'message'=>'Mail sent successfully!'));
     }
     public function Home(){
         return view('/app');
