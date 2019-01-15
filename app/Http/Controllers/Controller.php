@@ -19,13 +19,13 @@ class Controller extends BaseController
 
     public function Submit(Request $r){
         $file=$r->file('file');
-        $data[] = array(
+        $data = [
             'Header' => 'New Mail from Soir Music!',
             'name' => $r['name'],
             'songname' => $r['songname'],
             'sender' => $r['email'],
             'service' => $r['service'],
-        );
+        ];
         $path = Storage::disk('local')->putFileAs('',$file,$file->getClientOriginalName());
         Mail::send(new AttachedMail($data,$file->getClientOriginalName(),$path));
         Storage::delete($file->getClientOriginalName());

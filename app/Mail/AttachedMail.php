@@ -44,7 +44,7 @@ class AttachedMail extends Mailable
                     //->to('contact.brunorios@gmail.com');
                     ->to('wilson.mielke@gmail.com')
                     ->subject('Soir Music Request')
-                    ->view('mail',['data'=> $this->data])
+                    ->view('mail')->with(['data'=> $this->data])
                     ->attachFromStorage($this->filePath, $this->fileName);
     }
 }
