@@ -27,14 +27,10 @@ class Controller extends BaseController
             'sender' => $r->email,
             'service' => $r->service,
         );
-        $file->move('brunoberndt/SoirMusic/storage/app/User_music_samples/',$file->getClientOriginalName());
-        $exists = Storage::disk('local')->exists('Queen - Bohemian Rhapsody.mp3');
-        if($exists)print_r($file->getRealPath().'--->'.public_path().'|-----|');
-        //Mail::send(new AttachedMail($data, $file,'brunoberndt/SoirMusic/storage/app/User_music_samples/'));
-        //Mail::send('mail',$data,
-        //function($message) use ($data, $file) {
-        //    $message->attach($file->getRealPath(),array('as'=>$file->getClientOriginalName()));
-        //});
+        $path = Storage::putFileAs('User_music_samples/',$file,$file->getClientOriginalName());
+        if(Storage::disk('local')->exists($file->getClientOriginalName()))print_r('EXISTS!'.$path.'--->'.public_path().'|-----|'.$file->getClientSize());
+        else print_r($path.'--->'.public_path().'|-----|'.$file->getClientSize());
+        Mail::send(new AttachedMail($data,$file,$path));
         Storage::delete($file->getClientOriginalName());
 
         return json_encode(array('error'=>false, 'message'=>'Mail sent successfully!'));
