@@ -139,7 +139,7 @@
             return {
                 logoheight:650,
                 file:'',
-                form: {name:'',songname:'',email:'',service:'',music:[]},
+                form: {name:'',songname:'',email:'',service:''},
                 popup: false,
                 screen: 0,
                 scdet: {title:'',samples:'',img:'',submit:''},
@@ -198,16 +198,18 @@
             submit: function(){
                 let formData = new FormData();
                 formData.append('file', this.file);
-                formData.append('form',JSON.stringify(this.form));
-                axios.post( '/submit',
+                formData.append('name',this.form.name);
+                formData.append('email',this.form.email);
+                formData.append('songname',this.form.songname);
+                formData.append('service',this.form.service);
+                axios.post('/submit',
                     formData,
                     {
                         headers: {
                             'Content-Type': 'multipart/form-data',
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
-                    }
-                    ).then(function(){
+                    }).then(function(){
                     this.notify('Submitted successfully!','green');
                     })
                     .catch(function(){

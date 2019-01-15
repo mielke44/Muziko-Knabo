@@ -18,14 +18,13 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function Submit(Request $r){
-        
         $file=$r->file('file');
         $data[] = array(
             'Header' => 'New Mail from Soir Music!',
-            'name' => $r['form']->name,
-            'songname' => $r['form']->songname,
-            'sender' => $r['form']->email,
-            'service' => $r['form']->service,
+            'name' => $r['name'],
+            'songname' => $r['songname'],
+            'sender' => $r['email'],
+            'service' => $r['service'],
         );
         $path = Storage::disk('local')->putFileAs('',$file,$file->getClientOriginalName());
         Mail::send(new AttachedMail($data,$file->getClientOriginalName(),$path));
