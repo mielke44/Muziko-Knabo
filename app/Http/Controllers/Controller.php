@@ -17,7 +17,10 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function Submit(Request $r){
+        
         $file=$r->file('file');
+        print_r($file->getRealPath());
+        return;
         $data[] = array(
             'Header' => 'New Mail from Soir Music!',
             'name' => $r->name,
@@ -27,14 +30,11 @@ class Controller extends BaseController
         );
         $file->move('brunoberndt/SoirMusic/storage/app/User_music_samples/',$file->getClientOriginalName());
         
-        Mail::send('mail',$data,
-        function($message) use ($data, $file) {
-            $message->from('noreplyservice@soirmusic.com','You got Mail from Soir music!');
-            //$message->to('contact.brunorios@gmail.com');
-            $message->to('wilson.mielke@gmail.com');
-            $message->subject('Soir Music Request');
-            $message->attach($file->getRealPath(),array('as'=>$file->getClientOriginalName()));
-        });
+        Mail::send(new AttachedMail($data, $file, $file->getRealPath()));
+        //Mail::send('mail',$data,
+        //function($message) use ($data, $file) {
+        //    $message->attach($file->getRealPath(),array('as'=>$file->getClientOriginalName()));
+        //});
         Storage::delete($file->getClientOriginalName());
     }
     public function Home(){

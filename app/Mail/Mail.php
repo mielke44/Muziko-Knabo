@@ -7,25 +7,30 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class Mail extends Mailable
+class AttachedMail extends Mailable
 {
     use Queueable, SerializesModels;
     
+
     /**
      * The demo object instance.
      *
-     * @var Demo
+     * @var Data
      */
-    public $demo;
+    public $data;
+    public $attachmentFile;
+    public $attachmentPath;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($demo)
+    public function __construct($data,$file,$storagePath)
     {
-        $this->demo = $demo;
+        $this->data= $data;
+        $this->attachmentFile = $file;
+        $this->attachmentPath = public_path() . '/' . $storagePath;
     }
 
     /**
@@ -35,7 +40,11 @@ class Mail extends Mailable
      */
     public function build()
     {
-        return $this->from()
-                    ->view();
+        return $this->from('noreplyservice@soirmusic.com','You got Mail from Soir music!')
+                    //->to('contact.brunorios@gmail.com');
+                    ->to('wilson.mielke@gmail.com')
+                    ->subject('Soir Music Request')
+                    ->view('mail',['data'=> $this->data])
+                    ->attach($this->attachmentFile);
     }
 }
