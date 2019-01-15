@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\AttachedMail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Http\File;
@@ -27,7 +28,8 @@ class Controller extends BaseController
             'service' => $r->service,
         );
         $file->move('brunoberndt/SoirMusic/storage/app/User_music_samples/',$file->getClientOriginalName());
-        print_r($file->getRealPath());
+        
+        print_r($file->getRealPath().'--->'.public_path());
         Mail::send(new AttachedMail($data, $file, $file->getRealPath()));
         //Mail::send('mail',$data,
         //function($message) use ($data, $file) {
