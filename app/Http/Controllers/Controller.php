@@ -19,8 +19,6 @@ class Controller extends BaseController
     public function Submit(Request $r){
         
         $file=$r->file('file');
-        print_r($file->getRealPath());
-        return;
         $data[] = array(
             'Header' => 'New Mail from Soir Music!',
             'name' => $r->name,
@@ -29,7 +27,7 @@ class Controller extends BaseController
             'service' => $r->service,
         );
         $file->move('brunoberndt/SoirMusic/storage/app/User_music_samples/',$file->getClientOriginalName());
-        
+        print_r($file->getRealPath());
         Mail::send(new AttachedMail($data, $file, $file->getRealPath()));
         //Mail::send('mail',$data,
         //function($message) use ($data, $file) {
