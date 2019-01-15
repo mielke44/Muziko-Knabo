@@ -26,11 +26,9 @@ class AttachedMail extends Mailable
      *
      * @return void
      */
-    public function __construct($data,$file,$storagePath)
+    public function __construct($data)
     {
         $this->data= $data;
-        $this->attachmentFile = $file;
-        $this->attachmentPath = public_path() . '/' . $storagePath;
     }
 
     /**
@@ -45,6 +43,6 @@ class AttachedMail extends Mailable
                     ->to('wilson.mielke@gmail.com')
                     ->subject('Soir Music Request')
                     ->view('mail',['data'=> $this->data])
-                    ->attach($this->attachmentFile);
+                    ->attachFromStorage('/storage/app');
     }
 }
