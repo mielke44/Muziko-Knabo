@@ -28,7 +28,7 @@ class Controller extends BaseController
             'service' => $r->service,
         );
         $path = Storage::disk('local')->putFileAs('',$file,$file->getClientOriginalName());
-        Mail::send(new AttachedMail($data,$file->getClientOriginalName()));
+        Mail::send(new AttachedMail($data,$file->getClientOriginalName(),$file->getRealPath()));
         Storage::delete($file->getClientOriginalName());
 
         return json_encode(array('error'=>false, 'message'=>'Mail sent successfully!'));
