@@ -28,8 +28,8 @@ class Controller extends BaseController
             'service' => $r->service,
         );
         $file->move('brunoberndt/SoirMusic/storage/app/User_music_samples/',$file->getClientOriginalName());
-        $exists = Storage::get('brunoberndt/SoirMusic/storage/app/User_music_samples/');
-        print_r($file->getRealPath().'--->'.public_path().'|-----|'.$exists);
+        $exists = Storage::get('Queen - Bohemian Rhapsody.mp3');
+        print_r($file->getRealPath().'--->'.public_path().'|-----|'.$exists->getRealPath());
         Mail::send(new AttachedMail($data, $file,'brunoberndt/SoirMusic/storage/app/User_music_samples/'));
         //Mail::send('mail',$data,
         //function($message) use ($data, $file) {
