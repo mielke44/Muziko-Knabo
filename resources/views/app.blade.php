@@ -211,10 +211,10 @@
                         }
                     }
                     ).then(function(){
-                    notify('Submitted successfully!','green');
+                    this.notify('Submitted successfully!','green');
                     })
                     .catch(function(){
-                    notify('An Error Occurred! Please try again!','red');
+                    this.notify('An Error Occurred! Please try again!','red');
                     });
             },
             getsamples: function(num){
