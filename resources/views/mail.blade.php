@@ -13,7 +13,7 @@
     <p style="text-align: center; color: #000000;">&nbsp;</p>
     <p style="text-align: center; color: #000000;">&nbsp;Best Regards,</p>
     <p style="text-align: center; color: #000000;"><br /><em>{{$data['sender']}}</em></p>
-    <p style="color: #000000;"> 2019 SOIR MUSIC&copy; | Bruno Rios | E-Mail: <a href="mailto:contact.brunorios@gmail.com">contact.brunorios@gmail.com</a></p>
+    <p style="text-align: center; color: #000000;"> 2019 SOIR MUSIC&copy; | Bruno Rios | E-Mail: <a href="mailto:contact.brunorios@gmail.com">contact.brunorios@gmail.com</a></p>
     <hr />
 </div>
 <![endif]>

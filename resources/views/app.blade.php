@@ -85,12 +85,14 @@
                             <v-form ref='form'>
                                 <v-card-text>
                                     <v-text-field :rules="rules.name" v-model="form.name" label="Artist Name" required></v-text-field>
-                                    <v-text-field :rules="rules.name" v-model="form.songname" label="Song Name" required></v-text-field>
-                                    <v-text-field :rules="rules.mail" v-model="form.email" label="Your E-Mail" required></v-text-field>
-                                    <v-select v-model="form.service" :items="services" item-text="title" item-value="sc" label="Service" persistent-hint required></v-select>
+                                    <v-text-field :rules="rules.songname" v-model="form.songname" label="Song Name"></v-text-field>
+                                    <v-text-field :rules="rules.email" v-model="form.email" label="Your E-Mail" required></v-text-field>
+                                    <v-select :rules="rules.name" v-model="form.service" :items="services" item-text="title" item-value="sc" label="Service" persistent-hint required></v-select>
                                     <label>File
                                         <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
                                     </label>
+                                    <v-flex class="text-xs-center" color="light-grey">Accepted audio extensions: au, snd, mid, rmi, mp3, mp4, wav</v-flex>
+                                    <v-flex class="text-xs-center" color="light-grey">Max file size: 10MB</v-flex>
                                     <v-spacer></v-spacer>
                                     <v-divider></v-divider>
                                     <v-flex class="text-xs-center" color="light-grey">* submitting your song will only ensure that it will be considered by our team.
@@ -107,6 +109,37 @@
         </v-flex>
     </v-layout>
 </v-container>
+
+<!--SNACKBAR NOTIFY-->
+<v-snackbar v-model="snackbar_notify.model" multi-line timeout="3000" bottom right :color='snackbar_notify.color'>
+    @{{snackbar_notify.text}}
+    <v-btn flat @click.native="snackbar_notify.model = false">
+        <v-icon>clear</v-icon>
+    </v-btn>
+</v-snackbar>
+
+<!--CONFIRM/CHECK DIALOG-->
+<v-dialog v-model="dialog_confirm.model" persistent max-width="500px" transition="dialog-transition">
+    <v-card :color='dialog_confirm.color' dark>
+        <v-card-text class='text-xs-center display-1'>
+            @{{dialog_confirm.title}}
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-text class='text-xs-center'>
+            @{{dialog_confirm.text}}
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-text class='text-xs-center'>
+            <v-btn color="white" class='red--text' @click='dialog_confirm.model=false' fab small>
+                <v-icon large>close</v-icon>
+            </v-btn>
+            <v-btn color="white" class='green--text' @click='dialog_confirm.action();dialog_confirm.model=false' fab
+                small>
+                <v-icon large>check</v-icon>
+            </v-btn>
+            </v-card-tex>
+    </v-card>
+</v-dialog>
 @endsection
 
 @section('l-footer')
@@ -146,12 +179,15 @@
                 drawer: null,
                 rules: {
                     name:[
-                        v=> !!v || 'Field is mandatory!',
+                        v => !!v || 'Field is mandatory!'
+                    ],
+                    songname:[
+                        v => !!v || 'If no name has been chosen, use "undecided"!'
                     ],
                     email:[
                         v => !!v || 'Your Mail is mandatory!',
-                        v => /.+@.+/.test(v) || 'Mail must be in a valid format!',
-                    ],
+                        v => /.+@.+/.test(v) || 'Mail must be a valid format!'
+                    ]
                 },
                 services: [{
                         sc: 1,
@@ -186,38 +222,58 @@
                     model: false,
                     color: "",
                 },
+                dialog_confirm: {
+                    model: false,
+                    color: 'white',
+                    title: '',
+                    text: '',
+                    action: () => {},
+                }
             }
         },
         methods: {
             handleFileUpload(){
                 this.file = this.$refs.file.files[0];
             },
-            notify: function (text, color) {
+            notify: function(text, color) {
                 this.snackbar_notify.text = text;
                 this.snackbar_notify.model = true;
-                if (this.snackbar_notify.color == null) this.snackbar_notify.color = "black";
                 this.snackbar_notify.color = color;
+                if(this.snackbar_notify.color == null) this.snackbar_notify.color = "black";
+            },
+            confirm: function (title, text, color, action) {
+                this.dialog_confirm.model = true;
+                this.dialog_confirm.title = title;
+                this.dialog_confirm.text = text;
+                this.dialog_confirm.color = color;
+                this.dialog_confirm.action = action;
             },
             submit: function(){
                 let formData = new FormData();
-                formData.append('file', this.file);
-                formData.append('name',this.form.name);
-                formData.append('email',this.form.email);
-                formData.append('songname',this.form.songname);
-                formData.append('service',this.form.service);
-                axios.post('/submit',
-                    formData,
-                    {
-                        headers: {
-                            'Content-Type': 'multipart/form-data',
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    }).then(function(){
-                    this.notify('Submitted successfully!','green');
+                if(this.$refs.form.validate()){
+                    formData.append('file', this.file);
+                    formData.append('name',this.form.name);
+                    formData.append('email',this.form.email);
+                    formData.append('songname',this.form.songname);
+                    formData.append('service',this.form.service);
+                    app.confirm("Submitting your data", "Confirm?", "blue", () => {
+                    axios.post('/submit',
+                        formData,
+                        {
+                            headers: {
+                                'Content-Type': 'multipart/form-data',
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        }).then(response=>{
+                        this.popup=false;
+                        this.form={name:'',songname:'',email:'',service:''};
+                        this.notify("DONE! You'll receive a response e-mail from our experts ASAP!", "green");
+                        })
+                        .catch(response=>{
+                        this.notify('An Error Occurred! Please try again!','red');
+                        });
                     })
-                    .catch(function(){
-                    this.notify('An Error Occurred! Please try again!','red');
-                    });
+                }
             },
             getsamples: function(num){
                 return num;

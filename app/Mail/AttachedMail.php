@@ -41,8 +41,8 @@ class AttachedMail extends Mailable
     public function build()
     {
         return $this->from('noreplyservice@soirmusic.com','You got Mail from Soir music!')
-                    //->to('contact.brunorios@gmail.com');
-                    ->to('wilson.mielke@gmail.com')
+                    ->to('contact.brunorios@gmail.com')
+                    //->to('wilson.mielke@gmail.com')
                     ->subject('Soir Music Request')
                     ->view('mail')->with(['data'=> $this->data])
                     ->attachFromStorage($this->filePath, $this->fileName);
