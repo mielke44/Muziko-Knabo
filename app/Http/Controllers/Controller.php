@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AttachedMail;
+use App\Mail\QuestionMails;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Http\File;
@@ -36,6 +37,21 @@ class Controller extends BaseController
     }
     public function Home(){
         return view('/app');
+    }
+    public function SubmitQuestion(Request $r){
+        $data = [
+            'name' => $r['name'],
+            'email' => $r['email'],
+            'question' => $r['question'],
+        ];
+
+        $textBruno = $this->data['name']." Has asked a question: \n".$this->data['question']."\n\n\n Reply to:".$this->data['email'];
+        $textUser = "Hello ".$r['name']."!"."\n\n We at Soir Music received your question:\n".$r['question']
+        ."\n And we already have our top experts working on it!\n In a few we will be replying you in this address with the answer!";
+        Mail::send(new QuestionMails($data,"contact.brunorios@gmail.com",$textBruno));
+        Mail::send(new QuestionMails($data,$r['email'],$textUser));
+
+        return json_encode(array('error'=>false, 'message'=>'Mail sent successfully!'));
     }
 
 }

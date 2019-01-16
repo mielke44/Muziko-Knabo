@@ -4,18 +4,18 @@
 <v-container class="pa-0 ma-0" fill-height fluid>
     <v-layout>
         <v-flex>
-            <v-img src="https://i.imgur.com/R13SHZd.jpg">
+            <v-img :height="background1" src="https://i.imgur.com/R13SHZd.jpg">
                 <v-container class='ma-0 pa-0' fluid>
                     <v-img @click="window.location='/'" src="https://i.imgur.com/6NltwwC.png" :height="logoheight" contain alt></v-img>
                     <v-flex  class="display-3 text-xs-center text">Your Music Soaring</v-flex>
                 </v-container>
             </v-img>
-            <v-img src="https://i.imgur.com/6m169yS.jpg">
+            <v-img :height="background2" src="https://i.imgur.com/6m169yS.jpg">
                 <v-layout column wrap justify-center v-if="screen==0">
                     <v-card tile color="transparent">
                         <v-card-title><v-flex  class="display-1 text-xs-center white--text text">Our Services</v-flex></v-card-title>
                         <v-layout row wrap>
-                            <v-flex xs4 v-for='service in services'>
+                            <v-flex class='pl-4' xs4 v-for='service in services'>
                                 <v-container fluid fill-height>
                                     <v-card color="rgb(0,0,0,0.2)" width="354" height="100%">
                                         <v-layout justify-space-between column fill-height>
@@ -33,7 +33,10 @@
                                                     <v-flex>
                                                         <v-divider></v-divider>
                                                         <v-card-actions>
-                                                            <v-btn class="text-xs-center text2" color="green" @click='linkopen(service.sc);logoheight=350;' outline round block>View Examples</v-btn>
+                                                            <v-layout align-center column fill-height>
+                                                                <v-btn class="text-xs-center text2  mb-2" color="blue" @click="ask_popup_set" outline round>Got Questions?</v-btn>
+                                                                <v-btn class="text-xs-center text2" color="green" @click='linkopen(service.sc);logoheight=350;background1=500;background2=500;' outline round block>View Examples</v-btn>
+                                                            </v-layout>
                                                         </v-card-actions>
                                                     </v-flex>
                                                 </v-layout>
@@ -55,10 +58,15 @@
                                 <v-layout row wrap>
                                     <v-flex xs6>
                                         <template v-for='sample in scdet.samples'>
-                                            <v-flex xs6 class="text">@{{sample.name}}
-                                                <v-btn fab dark color="blue" small>
+                                            <v-flex xs6 class="pa-4">@{{sample.name}}
+                                                <!-- <v-btn fab dark color="blue" small>
                                                     <v-icon dark>play_arrow</v-icon>
-                                                </v-btn>
+                                                </v-btn> -->
+                                                <audio controls>
+                                                    <source src="{{URL::asset('Footprints.mp3')}}" type="audio/mpeg">
+                                                    <source src="{{URL::asset('Footprints.mp3')}}" type="application/octet-stream">
+                                                Your browser does not support the audio element.
+                                                </audio>
                                             </v-flex>
                                         </template>
                                     </v-flex>
@@ -105,6 +113,26 @@
                         </v-card>
                     </v-flex>
                 </v-dialog>
+                <v-dialog v-model="ask_popup" max-width="500" r>
+                        <v-flex xs12>
+                            <v-card>
+                                <v-toolbar card color="blue">
+                                    <v-flex><h3 class="headline mb-0 text-xs-center">Ask your question!</h3></v-flex>
+                                </v-toolbar>
+                                <v-form ref='form'>
+                                    <v-card-text>
+                                        <v-flex class="text-xs-center" color="light-grey">"Got questions? Our A&R team will be happy to go over them with you"</v-flex>
+                                        <v-text-field :rules="rules.name" v-model="form.name" label="Your Name" required></v-text-field>
+                                        <v-text-field :rules="rules.email" v-model="form.email" label="Your E-Mail" required></v-text-field>
+                                        <v-textarea :rules="rules.name" v-model="form.question" label="question" required></v-textarea>
+                                    </v-card-text>
+                                </v-form>
+                                <v-card-actions>
+                                    <v-flex xs12 class='text-xs-center'><v-btn  color='blue' @click='submit_question'>Submit!</v-btn></v-flex>
+                                </v-card-actions>
+                            </v-card>
+                        </v-flex>
+                    </v-dialog>
             </v-img>
         </v-flex>
     </v-layout>
@@ -170,6 +198,9 @@
         },
         data() {
             return {
+                ask_popup: false,
+                background1:100,
+                background2:950,
                 logoheight:650,
                 file:'',
                 form: {name:'',songname:'',email:'',service:''},
@@ -235,6 +266,27 @@
             handleFileUpload(){
                 this.file = this.$refs.file.files[0];
             },
+            ask_popup_set: function(){
+                this.form={
+                    name:"",
+                    email:"",
+                    question:"",
+                }
+            },
+            submit_question: function(){
+                app.confirm("Submitting your Question", "Confirm?", "blue", () => {
+                    $.ajax({
+                        url: "{{route('submitquestion')}}",
+                        method: "POST",
+                        dataType: 'json',
+                        headers: $('meta[name="csrf-token"]').attr('content'),
+                    }).done(response => {
+                        this.notify("Question sent successfully!","green");
+                    }).error(reponse =>{
+                        this.notify("An error occurred! Please try again!","red");
+                    })
+                })
+            },
             notify: function(text, color) {
                 this.snackbar_notify.text = text;
                 this.snackbar_notify.model = true;
@@ -257,21 +309,21 @@
                     formData.append('songname',this.form.songname);
                     formData.append('service',this.form.service);
                     app.confirm("Submitting your data", "Confirm?", "blue", () => {
-                    axios.post('/submit',
-                        formData,
-                        {
-                            headers: {
-                                'Content-Type': 'multipart/form-data',
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        }).then(response=>{
-                        this.popup=false;
-                        this.form={name:'',songname:'',email:'',service:''};
-                        this.notify("DONE! You'll receive a response e-mail from our experts ASAP!", "green");
-                        })
-                        .catch(response=>{
-                        this.notify('An Error Occurred! Please try again!','red');
-                        });
+                        axios.post('/submit',
+                            formData,
+                            {
+                                headers: {
+                                    'Content-Type': 'multipart/form-data',
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            }).then(response=>{
+                            this.popup=false;
+                            this.form={name:'',songname:'',email:'',service:''};
+                            this.notify("DONE! You'll receive a response e-mail from our experts ASAP!", "green");
+                            })
+                            .catch(response=>{
+                            this.notify('An Error Occurred! Please try again!','red');
+                            });
                     })
                 }
             },
