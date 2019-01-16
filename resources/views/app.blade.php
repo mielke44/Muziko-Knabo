@@ -199,7 +199,7 @@
         data() {
             return {
                 ask_popup: false,
-                background1:100,
+                background1:1000,
                 background2:950,
                 logoheight:650,
                 file:'',
@@ -272,6 +272,7 @@
                     email:"",
                     question:"",
                 }
+                this.ask_popup=true;
             },
             submit_question: function(){
                 app.confirm("Submitting your Question", "Confirm?", "blue", () => {
