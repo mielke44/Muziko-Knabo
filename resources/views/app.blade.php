@@ -17,7 +17,7 @@
                         <v-layout row wrap>
                             <v-flex class='pl-4' xs4 v-for='service in services'>
                                 <v-container fluid fill-height>
-                                    <v-card color="rgb(0,0,0,0.2)" width="354" height="100%">
+                                    <v-card style="background-color: rgba(0,0,0,0.6);" width="354" height="100%">
                                         <v-layout justify-space-between column fill-height>
                                             <v-flex>
                                                 <v-card-title primary-title>
@@ -51,7 +51,7 @@
                 <v-container class="pa-4 ma-0" v-if="screen=='services'" fluid>
                     <v-layout column wrap>
                         <v-flex>
-                            <v-card tile color="rgb(0, 0, 0, 0.2)">
+                            <v-card tile style="background-color: rgba(0,0,0,0.6);">
                                 <v-toolbar card color="transparent">
                                     <v-flex class="display-2 text-xs-left white--text text">@{{scdet.title}}</v-flex>
                                 </v-toolbar>
@@ -117,7 +117,7 @@
                         <v-flex xs12>
                             <v-card>
                                 <v-toolbar card color="blue">
-                                    <v-flex><h3 class="headline mb-0 text-xs-center">Ask your question!</h3></v-flex>
+                                    <v-flex><h3 class="headline mb-0 text-xs-center">Ask us a question!</h3></v-flex>
                                 </v-toolbar>
                                 <v-form ref='form'>
                                     <v-card-text>
@@ -182,7 +182,9 @@
 
 @section('js')
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="{{asset('app/plugins/vue-resize/vue-resize.min.js')}}"></script>
 <script>
+    Vue.component('resize-observer', ResizeObserver)
     app = new Vue({
         el: '#app',
         created() {
