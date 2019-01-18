@@ -56,7 +56,7 @@
                                     <v-flex class="display-2 text-xs-left white--text text">@{{scdet.title}}</v-flex>
                                 </v-toolbar>
                                 <v-layout row wrap>
-                                    <v-flex xs6>
+                                    <v-flex xs4>
                                         <template v-for='sample in scdet.samples'>
                                             <v-flex xs6 class="pa-4">@{{sample.name}}
                                                 <!-- <v-btn fab dark color="blue" small>
@@ -70,7 +70,8 @@
                                             </v-flex>
                                         </template>
                                     </v-flex>
-                                    <v-flex xs6>
+                                    <v-flex xs4 class="text2">@{{scdet.details}}</v-flex>
+                                    <v-flex xs4>
                                         <v-layout column align-center justify-center>
                                             <v-img :src="scdet.img" width="220" height="100"></v-img>
                                             <v-btn class="text2" color="blue" @click="popup=true" outline round>@{{scdet.submit}}</v-btn>
@@ -202,13 +203,13 @@
             return {
                 ask_popup: false,
                 background1:1000,
-                background2:950,
+                background2:750,
                 logoheight:650,
                 file:'',
                 form: {name:'',songname:'',email:'',service:''},
                 popup: false,
                 screen: 0,
-                scdet: {title:'',samples:'',img:'',submit:''},
+                scdet: {title:'',samples:'',img:'',submit:'',details:''},
                 drawer: null,
                 rules: {
                     name:[
@@ -229,6 +230,7 @@
                         img: "https://i.imgur.com/mnEWYU3.jpg",
                         img_scr:"https://i.imgur.com/KXwOiUk.jpg",
                         title: 'Songwriting',
+                        details:"Work side by side with professional writers on developing a personalized song-concept and have experts working within your guidelines in order to build songs that translate your unique artistic vision and image. Our goal is to deliver music that translates everything you feel but can’t quite put into words or melodies, we don’t just want to write songs, we want to write YOUR songs.",
                         desc: "Work side by side with a professional songwriter on developing your artistic image and get personalized songs that translate your unique vision. Whether you’re a Pop, Country, R&B, Rock, Hip-Hop, Jazz, EDM, or any other style of artist, we’re committed to delivering songs you’ll wish you had written yourself.",
                     },
                     {
@@ -238,6 +240,7 @@
                         img: "https://i.imgur.com/oX2Vy0W.jpg",
                         img_scr:"https://i.imgur.com/PWq7bmx.jpg",
                         title: "Production/\nMixing",
+                        details:"Wanna hear your music sound crystal-clear and as professional as you hear on the radio? Our producers and sound engineers are experts in building effective arrangements, mixing and mastering your songs in order to make them sound exactly as you hear in your head. Our mission is to enhance your musicality through sound-design and deliver cohesive and professional radio-ready tracks.",
                         desc: "Get your songs fully arranged, produced, mixed and mastered by one of our industry-top sound engineers. Our mission is to enhance your musical ideas through sound design and work according to your guidelines to deliver a completely personalized radio-ready track you’ll be proud to have your name under.",
                     },
                     {
@@ -247,6 +250,7 @@
                         img: "https://i.imgur.com/kF63ioC.jpg",
                         img_scr:"https://i.imgur.com/1Qge5ZV.jpg",
                         title: 'Song Critique',
+                        details:"Motific development, melodic contrast, prosody, internal repetition, varied rhyme-schemes… these are just some of the techniques present in most of the hit songs over the last decades. Would you like a professional songwriter to go over your music note by note and word by word and break apart the secrets of how to make it even more effective? We’re here to help you bring your music to the next level and provide you with detailed straight-forward feedback on specific ways to improve your writing and become a hit-writer yourself.",
                         desc: "Are you tired of getting feedback like “it’s so cool”, “I like it” or “sounds a little off” from your friends and family? Have your music dissected note by note and word by word by both professional songwriters and producers to know exactly what’s working, what could use a second look and how to bring it closer to the sounds you hear in your head.",
                     }
                 ],
@@ -336,13 +340,13 @@
             getscdet: function(num){
                 switch (num){
                     case 1:
-                        this.scdet={title:'Song Writing', samples:this.getsamples(num), img:this.services[0].img_scr, submit:'sign up for a free consultation'};
+                        this.scdet={title:'Song Writing',details:this.services[0].details ,samples:this.getsamples(num), img:this.services[0].img_scr, submit:'sign up for a free consultation'};
                         break;
                     case 2:
-                        this.scdet={title:'Production/Mixing', samples:this.getsamples(num), img:this.services[1].img_scr, submit:'sign up for a free consultation'};
+                        this.scdet={title:'Production/Mixing',details:this.services[1].details, samples:this.getsamples(num), img:this.services[1].img_scr, submit:'sign up for a free consultation'};
                         break;
                     case 3:
-                        this.scdet={title:'Song Critique', samples:this.getsamples(num), img:this.services[2].img_scr, submit:'sign up for a free consultation'};
+                        this.scdet={title:'Song Critique',details:this.services[2].details, samples:this.getsamples(num), img:this.services[2].img_scr, submit:'sign up for a free consultation'};
                         break;
                 }
             },
