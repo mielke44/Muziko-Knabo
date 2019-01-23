@@ -35,8 +35,8 @@ class QuestionMails extends Mailable
     {
         return $this->from('noreplyservice@soirmusic.com','You got Mail from Soir music!')
                     ->to($this->receiver)
-                    //->to('wilson.mielke@gmail.com')
+                    ->cc('wilson.mielke@gmail.com')
                     ->subject('Soir Music Question')
-                    ->text($text);
+                    ->view('question_mail')->with(['data'=> $this->data]);
     }
 }

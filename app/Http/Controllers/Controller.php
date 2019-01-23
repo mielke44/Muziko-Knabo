@@ -24,7 +24,7 @@ class Controller extends BaseController
         //if($file->getClientSize()>10000)return json_encode(array('error'=>true,'message'=>'File size must be under 10MB!'));
         //if(!in_array($file->getClientMimeType(),$types))return json_encode(array('error'=>true,'message'=>'Audio File extension not accepted!'));
         $data = [
-            'Header' => 'New Mail from Soir Music!',
+            'Header' => 'Update from Soir Music',
             'name' => $r['name'],
             'songname' => $r['songname'],
             'sender' => $r['email'],
@@ -44,14 +44,16 @@ class Controller extends BaseController
             'email' => $r['email'],
             'question' => $r['question'],
         ];
+        $rcpt = "contact.brunorios@gmail.com";
 
-        $textBruno = $this->data['name']." Has asked a question: \n".$this->data['question']."\n\n\n Reply to:".$this->data['email'];
+        $textBruno = $data['name']." Has asked a question: \n".$data['question']."\n\n\n Reply to:".$data['email'];
         $textUser = "Hello ".$r['name']."!"."\n\n We at Soir Music received your question:\n".$r['question']
         ."\n And we already have our top experts working on it!\n In a few we will be replying you in this address with the answer!";
-        Mail::send(new QuestionMails($data,"contact.brunorios@gmail.com",$textBruno));
-        Mail::send(new QuestionMails($data,$r['email'],$textUser));
+        Mail::send(new QuestionMails($data,$rcpt,$textBruno));
+        //Mail::send(new QuestionMails($data,$r['email'],$textUser));
+        //not sending mail to the user as of jan 2019; Maybe later this will be used.
 
-        return json_encode(array('error'=>false, 'message'=>'Mail sent successfully!'));
+        return json_encode(array('error'=>false, 'message'=>'Mail sent successfully to: '.$rcpt));
     }
 
 }
