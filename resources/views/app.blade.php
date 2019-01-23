@@ -1,6 +1,9 @@
 @extends('layouts.default.index')
 @section('title','Soir Music')
 @section('l-content')
+@section('css')
+<link href="{{asset('Fonts/Style.css')}}" rel="stylesheet" type="text/css"/>
+@endsection
 <v-container class="pa-0 ma-0" fill-height fluid>
     <v-layout>
         <v-flex>
@@ -8,14 +11,14 @@
                 <v-container class='ma-0 pa-0' fluid>
                     <v-img @click="window.location='/'" src="https://i.imgur.com/6NltwwC.png" :height="logoheight"
                         contain alt></v-img>
-                    <v-flex class="display-3 text-xs-center text">Your Music Soaring</v-flex>
+                    <v-flex  class="text-xs-center text-font2-title">Your Music Soaring</v-flex>
                 </v-container>
             </v-img>
             <v-img :height="background2" src="https://i.imgur.com/6m169yS.jpg">
                 <v-layout column wrap justify-center v-if="screen==0">
                     <v-card tile color="transparent">
                         <v-card-title>
-                            <v-flex class="display-1 text-xs-center white--text text">Our Services</v-flex>
+                            <v-flex class="text-xs-center text-font1-subheader">Our Services</v-flex>
                         </v-card-title>
                         <v-layout row wrap>
                             <v-flex class='pl-4' xs4 v-for='service in services'>
@@ -24,11 +27,11 @@
                                         <v-layout justify-space-between column fill-height>
                                             <v-flex>
                                                 <v-card-title primary-title>
-                                                    <h3 style="font-size: 18pt;" class="ma-1 text2">@{{service.title}}</h3>
+                                                    <h3 class="ma-1 text-font1-subheader">@{{service.title}}</h3>
                                                 </v-card-title>
                                                 <v-card-text>
                                                     <v-img :src="service.img" aspect-ratio="3.0"></v-img>
-                                                    <v-flex class="text2">@{{service.desc}}</v-flex>
+                                                    <v-flex class="text-font1">@{{service.desc}}</v-flex>
                                                 </v-card-text>
                                             </v-flex>
                                             <v-flex style="height:100px;">
@@ -37,9 +40,9 @@
                                                         <v-divider></v-divider>
                                                         <v-card-actions>
                                                             <v-layout align-center column fill-height>
-                                                                <v-btn class="text-xs-center text2  mb-2" color="blue"
+                                                                <v-btn class="text-xs-center text-font1  mb-2" color="blue"
                                                                     @click="ask_popup_set" outline round>Got Questions?</v-btn>
-                                                                <v-btn class="text-xs-center text2" color="green"
+                                                                <v-btn class="text-xs-center text-font1" color="green"
                                                                     @click='linkopen(service.sc);logoheight=350;background1=500;background2=500;'
                                                                     outline round block>View Examples</v-btn>
                                                             </v-layout>
@@ -59,7 +62,7 @@
                         <v-flex>
                             <v-card tile style="background-color: rgba(0,0,0,0.6);">
                                 <v-toolbar card color="transparent">
-                                    <v-flex class="display-2 text-xs-left white--text text">@{{scdet.title}}</v-flex>
+                                    <v-flex class="text-xs-left text-font1-subheader">@{{scdet.title}}</v-flex>
                                 </v-toolbar>
                                 <v-layout row wrap>
                                     <v-flex xs4>
@@ -76,11 +79,11 @@
                                             </v-flex>
                                         </template>
                                     </v-flex>
-                                    <v-flex xs4 class="text2">@{{scdet.details}}</v-flex>
+                                    <v-flex xs4 class="text-font1">@{{scdet.details}}</v-flex>
                                     <v-flex xs4>
-                                        <v-layout column align-center justify-center>
-                                            <v-img :src="scdet.img" width="220" height="100"></v-img>
-                                            <v-btn class="text2" color="blue" @click="popup=true" outline round>@{{scdet.submit}}</v-btn>
+                                        <v-layout column align-center fill-heigth>
+                                            <v-img class="mb-5" :src="scdet.img" width="300" height="200"></v-img>
+                                            <v-btn class="text-font1" color="blue" @click="popup=true" outline round>@{{scdet.submit}}</v-btn>
                                         </v-layout>
                                     </v-flex>
                                 </v-layout>
@@ -445,17 +448,8 @@
     .zeroblur {
         filter: blur(0px);
     }
-    .text {
-        -webkit-text-stroke: 1px black;
-        color: white;
-        text-shadow:
-            3px 3px 0 #000,
-            -1px -1px 0 #000,
-            1px -1px 0 #000,
-            -1px 1px 0 #000,
-            1px 1px 0 #000;
-    }
-    .text2 {
+    .text-font1{
+        font-family:Museo Sans W01_500;
         -webkit-text-stroke: 0.1px black;
         color: white;
         text-shadow:
@@ -466,6 +460,30 @@
             1px 1px 0 #000;
         font-size: 14pt;
     }
+    .text-font1-subheader{
+        font-family:Museo Sans W01_500;
+        -webkit-text-stroke: 0.01px black;
+        color: white;
+        text-shadow:
+            1px 1px 0 #000,
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+        font-size: 26pt;
+    }
+    .text-font2-title{
+        font-family:Ethnocentric W05 Regular;
+        font-size:42pt;
+        -webkit-text-stroke: 1px black;
+        color: white;
+        text-shadow:
+            3px 3px 0 #000,
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+}
 </style>
 
 @endsection

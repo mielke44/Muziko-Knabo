@@ -1,6 +1,8 @@
 
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+@include font-face(Museo Sans W01_500, public/Fonts/Samplino);
+@include font-face(Ethnocentric W05 Regular, public/Fonts/Samplino);
 
 // Variables
 @import 'variables';

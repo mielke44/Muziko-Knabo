@@ -1,0 +1,16 @@
+@font-face{
+    font-family:"Museo Sans W01_500";
+    src:url("905303/a29947fd-0c53-492b-b2f4-399b01153b30.eot?#iefix");
+    src:url("905303/a29947fd-0c53-492b-b2f4-399b01153b30.eot?#iefix")format("eot"),
+        url("905303/d9896899-f08c-4750-a874-a9e10d83c2cb.woff2")format("woff2"),
+        url("905303/d42dd843-62b0-4623-8855-d5882512c3c9.woff")format("woff"),
+        url("905303/6d532ccb-086c-4000-bab2-5d16862fcf01.ttf") format("truetype");
+}
+@font-face{
+    font-family:"Ethnocentric W05 Regular";
+    src:url("5116373/7fe6c44e-86d7-412a-a623-1af56c3da6f3.eot?#iefix");
+    src:url("5116373/7fe6c44e-86d7-412a-a623-1af56c3da6f3.eot?#iefix")format("eot"),
+        url("5116373/d98070ee-2935-4228-bd91-eb976e9dd289.woff2")format("woff2"),
+        url("5116373/a4a3da40-1f4e-4410-a7c0-356b9df6cde4.woff")format("woff"),
+        url("5116373/49a8ac8e-fc5a-4613-b510-8b346a303b90.ttf") format("truetype");
+}
