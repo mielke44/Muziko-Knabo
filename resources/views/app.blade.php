@@ -338,6 +338,7 @@
                         url: "{{route('submitquestion')}}",
                         method: "POST",
                         dataType: 'json',
+                        data: this.form,
                         headers: $('meta[name="csrf-token"]').attr('content'),
                         success:(response) => {
                         this.notify("Question sent successfully!", "green");
