@@ -342,6 +342,7 @@
                         headers: $('meta[name="csrf-token"]').attr('content'),
                         success:(response) => {
                         this.notify("Question sent successfully!", "green");
+                        this.ask_popup = false;
                         },
                         error:(reponse) => {
                         this.notify("An error occurred! Please try again!", "red");
