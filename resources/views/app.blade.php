@@ -14,7 +14,7 @@
                     <v-flex  class="text-xs-center text-font2-title">Your Music Soaring</v-flex>
                 </v-container>
             </v-img>
-            <v-img :height="background2" src="https://i.imgur.com/6m169yS.jpg">
+            <v-img  src="https://i.imgur.com/6m169yS.jpg">
                 <v-layout column wrap justify-center v-if="screen==0">
                     <v-card tile color="transparent">
                         <v-card-title>
@@ -65,15 +65,55 @@
                                     <v-flex class="text-xs-left text-font1-subheader">@{{scdet.title}}</v-flex>
                                 </v-toolbar>
                                 <v-layout row wrap>
-                                    <v-flex xs4>
-                                        <template v-for='sample in scdet.samples'>
-                                            <v-flex xs6 class="pa-4">@{{sample.name}}
-                                                <!-- <v-btn fab dark color="blue" small>
-                                                    <v-icon dark>play_arrow</v-icon>
-                                                </v-btn> -->
+                                    <v-flex xs4 class="text-xs-center text-font1-subheader">Samples:
+                                        <template v-if='screen_type==1'>
+                                            <v-flex xs12 class="pa-5 text-font1">Kiss Me
                                                 <audio controls>
-                                                    <source src="{{URL::asset('Footprints.mp3')}}" type="audio/mpeg">
-                                                    <source src="{{URL::asset('Footprints.mp3')}}" type="application/octet-stream">
+                                                    <source src="{{URL::asset('Samples/Kiss me.wav')}}" type="audio/wav">
+                                                    Your browser does not support the audio element.
+                                                </audio>
+                                            </v-flex>
+                                            <v-flex xs12 class="pa-5 text-font1">Won't Come Home
+                                                <audio controls>
+                                                    <source src="{{URL::asset('Samples/Wont Come Home.wav')}}" type="audio/wav">
+                                                    Your browser does not support the audio element.
+                                                </audio>
+                                            </v-flex>
+                                        </template>
+                                        <template v-if='screen_type==2'>
+                                            <v-flex xs12 class="pa-4 text-font1">Drifting</v-flex>
+                                            <v-flex class="pl-4">
+                                                <audio controls>
+                                                    <source src="{{URL::asset('Samples/Drifting_KenanDavis_BenFox_8.12.18_Mix_v03.wav')}}" type="audio/wav">
+                                                        Your browser does not support the audio element.
+                                                </audio>
+                                            </v-flex>
+                                            <v-flex xs12 class="pa-4 text-font1">Keep All Your Money</v-flex>
+                                            <v-flex class="pl-4">
+                                                <audio controls>
+                                                    <source src="{{URL::asset('Samples/KeepAllYourMoney_BenFox_01.26.19_v04.wav')}}" type="audio/wav">
+                                                        Your browser does not support the audio element.
+                                                </audio>
+                                            </v-flex>
+                                            <v-flex xs12 class="pa-4 text-font1">Next To Me</v-flex>
+                                            <v-flex class="pl-4">
+                                                <audio controls>
+                                                    <source src="{{URL::asset('Samples/NextToMe_ClaraRose_BenFox_01.26.19_Mix_v05.wav')}}" type="audio/wav">
+                                                        Your browser does not support the audio element.
+                                                </audio>
+                                            </v-flex>
+                                            <v-flex xs12 class="pa-4 text-font1">Upstate</v-flex>
+                                            <v-flex class="pl-4">
+                                                <audio controls>
+                                                    <source src="{{URL::asset('Samples/Upstate_BenFox_01.26.19_Mix_v04.wav')}}" type="audio/wav">
+                                                        Your browser does not support the audio element.
+                                                </audio>
+                                            </v-flex>
+                                        </template>
+                                        <template v-if="screen_type==3">
+                                            <v-flex xs12 class="pa-5 text-font1">Kiss Me
+                                                <audio controls>
+                                                    <source src="{{URL::asset('Samples/Kiss me.wav')}}" type="audio/wav">
                                                     Your browser does not support the audio element.
                                                 </audio>
                                             </v-flex>
@@ -86,6 +126,11 @@
                                             <v-btn class="text-font1" color="blue" @click="popup=true" outline round>@{{scdet.submit}}</v-btn>
                                         </v-layout>
                                     </v-flex>
+                                    <template v-if='screen_type==3'>
+                                        <v-flex xs6 class="text-xs-center pa-4 text-font1">Analysis example for 'kiss me' song:
+                                            <embed src="{{URL::asset('Samples/Kiss Me - website analisys - Voice 1-merged.pdf')}}" width="1250px" height="500px"/>
+                                        </v-flex>
+                                    </template>
                                 </v-layout>
                                 <v-card-action class="text-xs-center">
                                     <v-flex xs12 class='text-xs-center'>
@@ -242,6 +287,7 @@
         data() {
             return {
                 loader:false,
+                screen_type:null,
                 ask_popup: false,
                 background1: 1000,
                 background2: 750,
@@ -293,7 +339,7 @@
                         img_scr: "https://i.imgur.com/PWq7bmx.jpg",
                         title: "Production/\nMixing",
                         details:"Wanna hear your music sound crystal-clear and as professional as you hear on the radio? Our producers and sound engineers are experts in building effective arrangements, mixing and mastering your songs in order to make them sound exactly as you hear in your head. Our mission is to enhance your musicality through sound-design and deliver cohesive and professional radio-ready tracks.",
-                        desc: "Get your songs fully arranged, produced, mixed and mastered by one of our industry-top sound engineers. Our mission is to enhance your musical ideas through sound design and work according to your guidelines to deliver a completely personalized radio-ready track you’ll be proud to have your name under.",
+                        desc:"Get your songs fully arranged, produced, mixed and mastered by one of our industry-top sound engineers. Our mission is to enhance your musical ideas through sound design and work according to your guidelines to deliver a completely personalized radio-ready track you’ll be proud to have your name under.",
                     },
                     {
                         sc: 3,
@@ -302,8 +348,8 @@
                         img: "https://i.imgur.com/kF63ioC.jpg",
                         img_scr: "https://i.imgur.com/1Qge5ZV.jpg",
                         title: 'Song Critique',
-                        details: "Motific development, melodic contrast, prosody, internal repetition, varied rhyme-schemes… these are just some of the techniques present in most of the hit songs over the last decades. Would you like a professional songwriter to go over your music note by note and word by word and break apart the secrets of how to make it even more effective? We’re here to help you bring your music to the next level and provide you with detailed straight-forward feedback on specific ways to improve your writing and become a hit-writer yourself.",
-                        desc: "Are you tired of getting feedback like “it’s so cool”, “I like it” or “sounds a little off” from your friends and family? Have your music dissected note by note and word by word by both professional songwriters and producers to know exactly what’s working, what could use a second look and how to bring it closer to the sounds you hear in your head.",
+                        details:"Motific development, melodic contrast, prosody, internal repetition, varied rhyme-schemes… these are just some of the techniques present in most of the hit songs over the last decades. Would you like a professional songwriter to go over your music note by note and word by word and break apart the secrets of how to make it even more effective? We’re here to help you bring your music to the next level and provide you with detailed straight-forward feedback on specific ways to improve your writing and become a hit-writer yourself.",
+                        desc:"Are you tired of getting feedback like “it’s so cool”, “I like it” or “sounds a little off” from your friends and family? Have your music dissected note by note and word by word by both professional songwriters and producers to know exactly what’s working, what could use a second look and how to bring it closer to the sounds you hear in your head.",
                     }
                 ],
                 snackbar_notify: {
@@ -401,16 +447,12 @@
                         });
                 })
             },
-            getsamples: function (num) {
-                return num;
-            },
             getscdet: function (num) {
                 switch (num) {
                     case 1:
                         this.scdet = {
                             title: 'Song Writing',
                             details: this.services[0].details,
-                            samples: this.getsamples(num),
                             img: this.services[0].img_scr,
                             submit: 'sign up for a free consultation'
                         };
@@ -419,7 +461,6 @@
                         this.scdet = {
                             title: 'Production/Mixing',
                             details: this.services[1].details,
-                            samples: this.getsamples(num),
                             img: this.services[1].img_scr,
                             submit: 'sign up for a free consultation'
                         };
@@ -428,7 +469,6 @@
                         this.scdet = {
                             title: 'Song Critique',
                             details: this.services[2].details,
-                            samples: this.getsamples(num),
                             img: this.services[2].img_scr,
                             submit: 'sign up for a free consultation'
                         };
@@ -438,6 +478,7 @@
             linkopen: function (scnum) {
                 this.getscdet(scnum);
                 this.screen = 'services';
+                this.screen_type=scnum;
 
             },
         },
