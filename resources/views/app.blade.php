@@ -69,7 +69,7 @@
                                         <template v-if='screen_type==1'>
                                             <v-flex xs12 class="pa-5 text-font1">Kiss Me
                                                 <audio controls>
-                                                    <source src="{{URL::asset('Samples/Kiss me.wav')}}" type="audio/wav">
+                                                    <source src="{{URL::asset('Samples/Kiss Me.wav')}}" type="audio/wav">
                                                     Your browser does not support the audio element.
                                                 </audio>
                                             </v-flex>
@@ -113,7 +113,7 @@
                                         <template v-if="screen_type==3">
                                             <v-flex xs12 class="pa-5 text-font1">Kiss Me
                                                 <audio controls>
-                                                    <source src="{{URL::asset('Samples/Kiss me.wav')}}" type="audio/wav">
+                                                    <source src="{{URL::asset('Samples/Kiss Me.wav')}}" type="audio/wav">
                                                     Your browser does not support the audio element.
                                                 </audio>
                                             </v-flex>
