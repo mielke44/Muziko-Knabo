@@ -20,7 +20,7 @@
                         <v-card-title>
                             <v-flex class="text-xs-center text-font1-subheader">Our Services</v-flex>
                         </v-card-title>
-                        <v-layout row wrap>
+                        <v-layout :column="$vuetify.breakpoint.xsOnly" row wrap>
                             <v-flex class='pl-4' xs4 v-for='service in services'>
                                 <v-container fluid fill-height>
                                     <v-card style="background-color: rgba(0,0,0,0.6);" width="354" height="100%">
