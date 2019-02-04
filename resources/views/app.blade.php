@@ -11,10 +11,10 @@
                 <v-container class='ma-0 pa-0' fluid>
                     <v-img @click="window.location='/'" src="https://i.imgur.com/6NltwwC.png" :height="logoheight"
                         contain alt></v-img>
-                    <v-flex  class="text-xs-center text-font2-title">Your Music Soaring</v-flex>
                 </v-container>
             </v-img>
             <v-img  src="https://i.imgur.com/6m169yS.jpg">
+                <v-flex  class="pa-3 text-xs-center text-font2-title">Your Music Soaring</v-flex>
                 <v-layout column wrap justify-center v-if="screen==0">
                     <v-card tile color="transparent">
                         <v-card-title>
@@ -50,6 +50,7 @@
                                                     </v-flex>
                                                 </v-layout>
                                             </v-flex>
+                                            <v-flex class="pa-2 text-font1"></v-flex>
                                         </v-layout>
                                     </v-card>
                                 </v-container>
@@ -62,66 +63,89 @@
                         <v-flex>
                             <v-card tile style="background-color: rgba(0,0,0,0.6);">
                                 <v-toolbar card color="transparent">
-                                    <v-flex class="text-xs-left text-font1-subheader">@{{scdet.title}}</v-flex>
+                                    <v-flex class="text-xs-center text-font1-subheader">@{{scdet.title}}</v-flex>
                                 </v-toolbar>
                                 <v-layout row wrap>
-                                    <v-flex xs4 class="text-xs-center text-font1-subheader">Samples:
+                                    <v-flex xs4 class="pa-2 text-xs-center text-font1-subheader">Samples:
                                         <template v-if='screen_type==1'>
-                                            <v-flex xs12 class="pa-5 text-font1">Kiss Me
-                                                <audio controls>
-                                                    <source src="{{URL::asset('Samples/Kiss Me.wav')}}" type="audio/wav">
-                                                    Your browser does not support the audio element.
-                                                </audio>
-                                            </v-flex>
-                                            <v-flex xs12 class="pa-5 text-font1">Won't Come Home
-                                                <audio controls>
-                                                    <source src="{{URL::asset('Samples/Wont Come Home.wav')}}" type="audio/wav">
-                                                    Your browser does not support the audio element.
-                                                </audio>
-                                            </v-flex>
+                                            <v-layout column wrap>
+                                                <v-flex xs12 class="text-xs-center pa-2 text-font1">Kiss Me</v-flex>
+                                                <v-flex class="pl-2">
+                                                    <audio class="pa-2" controls>
+                                                        <source src="{{URL::asset('Samples/Kiss Me.wav')}}" type="audio/wav">
+                                                        Your browser does not support the audio element.
+                                                    </audio>
+                                                </v-flex>
+                                                <v-flex xs12 class="text-xs-center pa-2 text-font1">Won't Come Home</v-flex>
+                                                <v-flex class="pl-2">
+                                                    <audio class="pa-2" controls>
+                                                        <source src="{{URL::asset('Samples/Wont Come Home.wav')}}" type="audio/wav">
+                                                            Your browser does not support the audio element.
+                                                    </audio>
+                                                </v-flex>
+                                                <v-flex xs12 class="text-xs-center pa-2 text-font1">Collide</v-flex>
+                                                <v-flex class="pl-2">
+                                                    <audio class="pa-2" controls>
+                                                        <source src="{{URL::asset('Samples/Collide.wav')}}" type="audio/wav">
+                                                            Your browser does not support the audio element.
+                                                    </audio>
+                                                </v-flex>
+                                                <v-flex xs12 class="text-xs-center pa-2 text-font1">Dime</v-flex>
+                                                <v-flex class="pl-2">
+                                                    <audio class="pa-2" controls>
+                                                        <source src="{{URL::asset('Samples/Dime.wav')}}" type="audio/wav">
+                                                            Your browser does not support the audio element.
+                                                    </audio>
+                                                </v-flex>
+                                            </v-layout>
                                         </template>
                                         <template v-if='screen_type==2'>
-                                            <v-flex xs12 class="pa-4 text-font1">Drifting</v-flex>
-                                            <v-flex class="pl-4">
-                                                <audio controls>
-                                                    <source src="{{URL::asset('Samples/Drifting_KenanDavis_BenFox_8.12.18_Mix_v03.wav')}}" type="audio/wav">
-                                                        Your browser does not support the audio element.
-                                                </audio>
-                                            </v-flex>
-                                            <v-flex xs12 class="pa-4 text-font1">Keep All Your Money</v-flex>
-                                            <v-flex class="pl-4">
-                                                <audio controls>
-                                                    <source src="{{URL::asset('Samples/KeepAllYourMoney_BenFox_01.26.19_v04.wav')}}" type="audio/wav">
-                                                        Your browser does not support the audio element.
-                                                </audio>
-                                            </v-flex>
-                                            <v-flex xs12 class="pa-4 text-font1">Next To Me</v-flex>
-                                            <v-flex class="pl-4">
-                                                <audio controls>
-                                                    <source src="{{URL::asset('Samples/NextToMe_ClaraRose_BenFox_01.26.19_Mix_v05.wav')}}" type="audio/wav">
-                                                        Your browser does not support the audio element.
-                                                </audio>
-                                            </v-flex>
-                                            <v-flex xs12 class="pa-4 text-font1">Upstate</v-flex>
-                                            <v-flex class="pl-4">
-                                                <audio controls>
-                                                    <source src="{{URL::asset('Samples/Upstate_BenFox_01.26.19_Mix_v04.wav')}}" type="audio/wav">
-                                                        Your browser does not support the audio element.
-                                                </audio>
-                                            </v-flex>
+                                            <v-layout column wrap>
+                                                <v-flex xs12 class="text-xs-center pa-2 text-font1">Drifting</v-flex>
+                                                <v-flex class="pl-2">
+                                                    <audio class="pa-2" controls>
+                                                        <source src="{{URL::asset('Samples/Drifting_KenanDavis_BenFox_8.12.18_Mix_v03.wav')}}" type="audio/wav">
+                                                            Your browser does not support the audio element.
+                                                    </audio>
+                                                </v-flex>
+                                                <v-flex xs12 class="text-xs-center pa-2 text-font1">Keep All Your Money</v-flex>
+                                                <v-flex class="pl-2">
+                                                    <audio class="pa-2" controls>
+                                                        <source src="{{URL::asset('Samples/KeepAllYourMoney_BenFox_01.26.19_v04.wav')}}" type="audio/wav">
+                                                            Your browser does not support the audio element.
+                                                    </audio>
+                                                </v-flex>
+                                                <v-flex xs12 class="text-xs-center pa-2 text-font1">Next To Me</v-flex>
+                                                <v-flex class="pl-2">
+                                                    <audio class="pa-2" controls>
+                                                        <source src="{{URL::asset('Samples/NextToMe_ClaraRose_BenFox_01.26.19_Mix_v05.wav')}}" type="audio/wav">
+                                                            Your browser does not support the audio element.
+                                                    </audio>
+                                                </v-flex>
+                                                <v-flex xs12 class="text-xs-center pa-2 text-font1">Upstate</v-flex>
+                                                <v-flex class="pl-2">
+                                                    <audio class="pa-2" controls>
+                                                        <source src="{{URL::asset('Samples/Upstate_BenFox_01.26.19_Mix_v04.wav')}}" type="audio/wav">
+                                                            Your browser does not support the audio element.
+                                                    </audio>
+                                                </v-flex>
+                                            </v-layout>
                                         </template>
                                         <template v-if="screen_type==3">
-                                            <v-flex xs12 class="pa-5 text-font1">Kiss Me
-                                                <audio controls>
+                                            <v-flex xs12 class="text-xs-center pa-5 text-font1">Kiss Me</v-flex>
+                                            <v-flex class="pl-2">
+                                                <audio class="pl-2" controls>
                                                     <source src="{{URL::asset('Samples/Kiss Me.wav')}}" type="audio/wav">
                                                     Your browser does not support the audio element.
                                                 </audio>
                                             </v-flex>
                                         </template>
                                     </v-flex>
-                                    <v-flex xs4 class="text-font1">@{{scdet.details}}</v-flex>
+                                    <v-divider color="white" inset vertical></v-divider>
+                                    <v-flex xs3 class="mt-5 ml-5 mr-5 text-font-spaced">@{{scdet.details}}</v-flex>
+                                    <v-divider color="white" inset vertical></v-divider>
                                     <v-flex xs4>
-                                        <v-layout column align-center fill-heigth>
+                                        <v-layout class="pt-5 mt-5" column align-center justify-center fill-heigth>
                                             <v-img class="mb-5" :src="scdet.img" width="300" height="200"></v-img>
                                             <v-btn class="text-font1" color="blue" @click="popup=true" outline round>@{{scdet.submit}}</v-btn>
                                         </v-layout>
@@ -132,6 +156,7 @@
                                         </v-flex>
                                     </template>
                                 </v-layout>
+                                <v-divider class="pa-3 pb-3" inset></v-divider>
                                 <v-card-action class="text-xs-center">
                                     <v-flex xs12 class='text-xs-center'>
                                         <v-btn icon color='blue' @click="window.location='/';logoheight=650">
@@ -289,7 +314,7 @@
                 loader:false,
                 screen_type:null,
                 ask_popup: false,
-                background1: 1000,
+                background1: 650,
                 background2: 750,
                 logoheight: 650,
                 file: '',
@@ -498,6 +523,24 @@
         font-family:Museo Sans W01_500;
         -webkit-text-stroke: 0.1px black;
         color: white;
+        text-align: justify;
+        text-justify: inter-word;
+        text-shadow:
+            1px 1px 0 #000,
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+        font-size: 14pt;
+    }
+    .text-font-spaced{
+        font-family:Museo Sans W01_500;
+        text-align: justify;
+        text-justify: inter-word;
+        line-height: 2;
+        display: block;
+        -webkit-text-stroke: 0.1px black;
+        color: white;
         text-shadow:
             1px 1px 0 #000,
             -1px -1px 0 #000,
@@ -508,7 +551,7 @@
     }
     .text-font1-subheader{
         font-family:Museo Sans W01_500;
-        -webkit-text-stroke: 0.01px black;
+        -webkit-text-stroke: 0.5px black;
         color: white;
         text-shadow:
             1px 1px 0 #000,

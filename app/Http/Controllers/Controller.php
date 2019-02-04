@@ -46,9 +46,9 @@ class Controller extends BaseController
         ];
         $rcpt = "contact.brunorios@gmail.com";
 
-        $textBruno = $data['name']." Has asked a question: \n".$data['question']."\n\n\n Reply to:".$data['email'];
-        $textUser = "Hello ".$r['name']."!"."\n\n We at Soir Music received your question:\n".$r['question']
-        ."\n And we already have our top experts working on it!\n In a few we will be replying you in this address with the answer!";
+        //$textBruno = $data['name']." Has asked a question: \n".$data['question']."\n\n\n Reply to:".$data['email'];
+        //$textUser = "Hello ".$r['name']."!"."\n\n We at Soir Music received your question:\n".$r['question']
+        //."\n And we already have our top experts working on it!\n In a few we will be replying you in this address with the answer!";
         Mail::send(new QuestionMails($data,$rcpt,$textBruno));
         //Mail::send(new QuestionMails($data,$r['email'],$textUser));
         //not sending mail to the user as of jan 2019; Maybe later this will be used.
