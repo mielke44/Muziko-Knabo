@@ -21,7 +21,7 @@
                             <v-flex class="text-xs-center text-font1-subheader">Our Services</v-flex>
                         </v-card-title>
                         <v-layout :column="$vuetify.breakpoint.xsOnly" row wrap>
-                            <v-flex class='pl-4' xs4 v-for='service in services'>
+                            <v-flex class='pa-2' xs4 v-for='service in services'>
                                 <v-container fluid fill-height>
                                     <v-card style="background-color: rgba(0,0,0,0.6);" width="354" height="100%">
                                         <v-layout justify-space-between column fill-height>
@@ -58,6 +58,9 @@
                         <v-flex class="text-xs-center pa-2 text-font1">Couldn't find the service you're looking for? Tell us what you want, we'll be happy to adapt our skills to your needs!</v-flex>
                     </v-card>
                 </v-layout>
+                <v-container class="pa-4 ma-0" v-if="screen=='services' && $vuetify.breakpoint.xsOnly" fluid>
+
+                </v-container>
                 <v-container class="pa-4 ma-0" v-if="screen=='services'" fluid>
                     <v-layout column wrap>
                         <v-flex>
