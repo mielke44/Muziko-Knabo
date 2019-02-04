@@ -142,7 +142,7 @@
                                         </template>
                                     </v-flex>
                                     <v-divider color="white" inset vertical></v-divider>
-                                    <v-flex xs3 class="mt-5 ml-5 mr-5 text-font-spaced">@{{scdet.details}}</v-flex>
+                                    <v-flex xs3 :xs4="$vuetify.breakpoint.xsOnly" class="mt-5 ml-5 mr-5 text-font-spaced">@{{scdet.details}}</v-flex>
                                     <v-divider color="white" inset vertical></v-divider>
                                     <v-flex xs4>
                                         <v-layout class="pt-5 mt-5" column align-center justify-center fill-heigth>
