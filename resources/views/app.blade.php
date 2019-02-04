@@ -50,12 +50,12 @@
                                                     </v-flex>
                                                 </v-layout>
                                             </v-flex>
-                                            <v-flex class="pa-2 text-font1"></v-flex>
                                         </v-layout>
                                     </v-card>
                                 </v-container>
                             </v-flex>
                         </v-layout>
+                        <v-flex class="text-xs-center pa-2 text-font1">Couldn't find the service you're looking for? Tell us what you want, we'll be happy to adapt our skills to your needs!</v-flex>
                     </v-card>
                 </v-layout>
                 <v-container class="pa-4 ma-0" v-if="screen=='services'" fluid>
@@ -167,6 +167,7 @@
                             </v-card>
                         </v-flex>
                     </v-layout>
+                    <v-flex class="text-xs-center pa-2 text-font1">Couldn't find the service you're looking for? Tell us what you want, we'll be happy to adapt our skills to your needs!</v-flex>
                 </v-container>
                 <v-dialog v-model="popup" max-width="500" r>
                     <v-flex xs12>
