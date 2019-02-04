@@ -58,9 +58,6 @@
                         <v-flex class="text-xs-center pa-2 text-font1">Couldn't find the service you're looking for? Tell us what you want, we'll be happy to adapt our skills to your needs!</v-flex>
                     </v-card>
                 </v-layout>
-                <v-container class="pa-4 ma-0" v-if="screen=='services' && $vuetify.breakpoint.xsOnly" fluid>
-
-                </v-container>
                 <v-container class="pa-4 ma-0" v-if="screen=='services'" fluid>
                     <v-layout column wrap>
                         <v-flex>
@@ -68,7 +65,7 @@
                                 <v-toolbar card color="transparent">
                                     <v-flex class="text-xs-center text-font1-subheader">@{{scdet.title}}</v-flex>
                                 </v-toolbar>
-                                <v-layout row wrap>
+                                <v-layout :column="$vuetify.breakpoint.xsOnly" row wrap>
                                     <v-flex xs4 class="pa-2 text-xs-center text-font1-subheader">Samples:
                                         <template v-if='screen_type==1'>
                                             <v-layout column wrap>
