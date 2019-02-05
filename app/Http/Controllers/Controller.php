@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
 use App\Mail\AttachedMail;
 use App\Mail\QuestionMails;
 use Illuminate\Support\Facades\Storage;
@@ -34,6 +35,19 @@ class Controller extends BaseController
         Mail::send(new AttachedMail($data,$file->getClientOriginalName(),$path));
         Storage::delete($file->getClientOriginalName());
         return json_encode(array('error'=>false, 'message'=>'Mail sent successfully!'));
+    }
+    public function GetSamples(){
+        $files = Storage::files('/Samples');
+        $files[0] = '';
+        $samples = ['name'=>[],'url'=>[]];
+        foreach($files as $file){
+            if($file!=''){
+                array_push($samples['name'],explode('/',$file)[1]);
+                $url = "{{URL::asset('Samples/".explode('/',$file)[1]."')}}";
+                array_push($samples['url'],$url);
+            }
+        }
+        //return $samples;
     }
     public function Home(){
         return view('/app');
