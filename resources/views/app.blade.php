@@ -69,16 +69,6 @@
                                     <v-flex xs4 class="pa-2 text-xs-center text-font1-subheader">Samples:
                                         <template v-if='screen_type==1'>
                                             <v-layout column wrap>
-                                                <!--
-                                                <v-template v-for="sample in scdet.sample"></v-template>
-                                                <v-flex xs12 class="text-xs-center pa-2 text-font1">@{{sample.name}}</v-flex>
-                                                <v-flex class="pl-2">
-                                                    <audio class="pa-2" controls>
-                                                        <source :src="sample.address" type="audio/wav">
-                                                        Your browser does not support the audio element.
-                                                    </audio>
-                                                </v-flex>
-                                                -->
                                                 <v-flex xs12 class="text-xs-center pa-2 text-font1">Kiss Me</v-flex>
                                                 <v-flex class="pl-2">
                                                     <audio class="pa-2" controls>
@@ -366,10 +356,6 @@
                         title: 'Songwriting',
                         details:"Work side by side with professional writers on developing a personalized song-concept and have experts working within your guidelines in order to build songs that translate your unique artistic vision and image. Our goal is to deliver music that translates everything you feel but can’t quite put into words or melodies, we don’t just want to write songs, we want to write YOUR songs.",
                         desc:"Work side by side with a professional songwriter on developing your artistic image and get personalized songs that translate your unique vision. Whether you’re a Pop, Country, R&B, Rock, Hip-Hop, Jazz, EDM, or any other style of artist, we’re committed to delivering songs you’ll wish you had written yourself.",
-                        samples_add:[["{{URL::asset('Samples/Kiss Me.wav')}}","Kiss Me"],
-                                    ["{{URL::asset('Samples/Wont Come Home.wav')}}","Won't Come Home"],
-                                    ["{{URL::asset('Samples/Dime.wav')}}","Collide"],
-                                    ["{{URL::asset('Samples/Collide.wav')}}","Dime"]]
                     },
                     {
                         sc: 2,
@@ -380,11 +366,6 @@
                         title: "Production/\nMixing",
                         details:"Wanna hear your music sound crystal-clear and as professional as you hear on the radio? Our producers and sound engineers are experts in building effective arrangements, mixing and mastering your songs in order to make them sound exactly as you hear in your head. Our mission is to enhance your musicality through sound-design and deliver cohesive and professional radio-ready tracks.",
                         desc:"Get your songs fully arranged, produced, mixed and mastered by one of our industry-top sound engineers. Our mission is to enhance your musical ideas through sound design and work according to your guidelines to deliver a completely personalized radio-ready track you’ll be proud to have your name under.",
-                        samples_name: ["Drifting","Keep All Your Money","Next To Me","Upstate"],
-                        samples_add:["{{URL::asset('Samples/Drifting_KenanDavis_BenFox_8.12.18_Mix_v03.wav')}}",
-                                    "{{URL::asset('Samples/KeepAllYourMoney_BenFox_01.26.19_v04.wav')}}",
-                                    "{{URL::asset('Samples/NextToMe_ClaraRose_BenFox_01.26.19_Mix_v05.wav')}}",
-                                    "{{URL::asset('Samples/Upstate_BenFox_01.26.19_Mix_v04.wav')}}"],
                     },
                     {
                         sc: 3,
@@ -395,8 +376,6 @@
                         title: 'Song Critique',
                         details:"Motific development, melodic contrast, prosody, internal repetition, varied rhyme-schemes… these are just some of the techniques present in most of the hit songs over the last decades. Would you like a professional songwriter to go over your music note by note and word by word and break apart the secrets of how to make it even more effective? We’re here to help you bring your music to the next level and provide you with detailed straight-forward feedback on specific ways to improve your writing and become a hit-writer yourself.",
                         desc:"Are you tired of getting feedback like “it’s so cool”, “I like it” or “sounds a little off” from your friends and family? Have your music dissected note by note and word by word by both professional songwriters and producers to know exactly what’s working, what could use a second look and how to bring it closer to the sounds you hear in your head.",
-                        samples_name: ["Kiss Me"],
-                        samples_add:["{{URL::asset('Samples/Kiss Me.wav')}}"],
                     }
                 ],
                 snackbar_notify: {
@@ -494,19 +473,6 @@
                         });
                 })
             },
-            getsamples: function(){
-                $.ajax({
-                        url: '{{route("getsamples")}}',
-                        method: 'get',
-                        dataType: 'json',
-                        success:(response) => {
-                        return response;
-                        },
-                        error:(response) => {
-                            this.notify("An error occurred retrieving the music samples! Please refresh the page!", "red");
-                        }
-                    })
-            },
             getscdet: function (num) {
                 switch (num) {
                     case 1:
@@ -514,8 +480,7 @@
                             title: 'Song Writing',
                             details: this.services[0].details,
                             img: this.services[0].img_scr,
-                            submit: 'sign up for a free consultation',
-                            samples: this.getsamples(),
+                            submit: 'sign up for a free consultation'
                         };
                         break;
                     case 2:
@@ -523,9 +488,7 @@
                             title: 'Production/Mixing',
                             details: this.services[1].details,
                             img: this.services[1].img_scr,
-                            submit: 'sign up for a free consultation',
-                            samples_name: this.services[1].samples_name,
-                            samples_add: this.services[1].samples_add,
+                            submit: 'sign up for a free consultation'
                         };
                         break;
                     case 3:
@@ -533,17 +496,15 @@
                             title: 'Song Critique',
                             details: this.services[2].details,
                             img: this.services[2].img_scr,
-                            submit: 'sign up for a free consultation',
-                            samples_name: this.services[2].samples_name,
-                            samples_add: this.services[2].samples_add,
+                            submit: 'sign up for a free consultation'
                         };
                         break;
                 }
             },
             linkopen: function (scnum) {
                 this.getscdet(scnum);
-                //this.screen = 'services';
-                //this.screen_type=scnum;
+                this.screen = 'services';
+                this.screen_type=scnum;
 
             },
         },
