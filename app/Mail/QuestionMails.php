@@ -19,11 +19,10 @@ class QuestionMails extends Mailable
      *
      * @return void
      */
-    public function __construct($data,$receiver,$text)
+    public function __construct($data,$receiver)
     {
         $this->data = $data;
         $this->receiver = $receiver;
-        $this->text = $text;
     }
 
     /**

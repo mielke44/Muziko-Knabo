@@ -45,15 +45,21 @@ class Controller extends BaseController
             'question' => $r['question'],
         ];
         $rcpt = "contact.brunorios@gmail.com";
+        Mail::send(new QuestionMails($data,$rcpt));
 
         //$textBruno = $data['name']." Has asked a question: \n".$data['question']."\n\n\n Reply to:".$data['email'];
         //$textUser = "Hello ".$r['name']."!"."\n\n We at Soir Music received your question:\n".$r['question']
         //."\n And we already have our top experts working on it!\n In a few we will be replying you in this address with the answer!";
-        Mail::send(new QuestionMails($data,$rcpt,$textBruno));
         //Mail::send(new QuestionMails($data,$r['email'],$textUser));
         //not sending mail to the user as of jan 2019; Maybe later this will be used.
 
         return json_encode(array('error'=>false, 'message'=>'Mail sent successfully to: '.$rcpt));
     }
+
+    //Message to developer: tried to automize sample retrieving in version 1.0.1 (unreleased to production and deleted locally), but controller
+    // directories were in conflict with view settings, TO BE DONE IN THE FUTURE! (samples should be stored in different folders for
+    //each service and made in a way that the owner Bruno can just put them in a folder and the page will get them) Tried using storage facade
+    //which uses FileSystem documentation and a getSample() method, vuetify.js and vue.js make it pretty easy to make blade templates for multiple
+    //audio entries. Don't know if src param accepts binding, that may have been the problem. 
 
 }
