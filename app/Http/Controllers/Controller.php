@@ -61,7 +61,6 @@ class Controller extends BaseController
         if($r['num']==2)$service = 'Production';
         if($r['num']==3)$service = 'Analysis_songs';
         $files = Storage::Files('public/Samples/'.$service);
-        $files[0]= '';
         $samples = [];
         foreach($files as $file){
             if($file!=''){
