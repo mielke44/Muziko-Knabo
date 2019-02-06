@@ -69,76 +69,40 @@
                                     <v-flex xs4 class="pa-2 text-xs-center text-font1-subheader">Samples:
                                         <template v-if='screen_type==1'>
                                             <v-layout column wrap>
-                                                <v-flex xs12 class="text-xs-center pa-2 text-font1">Kiss Me</v-flex>
-                                                <v-flex class="pl-2">
-                                                    <audio class="pa-2" controls>
-                                                        <source src="{{URL::asset('Samples/Kiss Me.wav')}}" type="audio/wav">
-                                                        Your browser does not support the audio element.
-                                                    </audio>
-                                                </v-flex>
-                                                <v-flex xs12 class="text-xs-center pa-2 text-font1">Won't Come Home</v-flex>
-                                                <v-flex class="pl-2">
-                                                    <audio class="pa-2" controls>
-                                                        <source src="{{URL::asset('Samples/Wont Come Home.wav')}}" type="audio/wav">
+                                                <v-template v-for="sample in scdet.samples">
+                                                    <v-flex xs12 class="text-xs-center pa-2 text-font1">@{{sample.name}}</v-flex>
+                                                    <v-flex class="pl-2">
+                                                        <audio class="pa-2" controls>
+                                                            <source :src="sample.url" type="audio/wav">
                                                             Your browser does not support the audio element.
-                                                    </audio>
-                                                </v-flex>
-                                                <v-flex xs12 class="text-xs-center pa-2 text-font1">Collide</v-flex>
-                                                <v-flex class="pl-2">
-                                                    <audio class="pa-2" controls>
-                                                        <source src="{{URL::asset('Samples/Collide.wav')}}" type="audio/wav">
-                                                            Your browser does not support the audio element.
-                                                    </audio>
-                                                </v-flex>
-                                                <v-flex xs12 class="text-xs-center pa-2 text-font1">Dime</v-flex>
-                                                <v-flex class="pl-2">
-                                                    <audio class="pa-2" controls>
-                                                        <source src="{{URL::asset('Samples/Dime.wav')}}" type="audio/wav">
-                                                            Your browser does not support the audio element.
-                                                    </audio>
-                                                </v-flex>
+                                                        </audio>
+                                                    </v-flex>
+                                                </v-template>
                                             </v-layout>
                                         </template>
                                         <template v-if='screen_type==2'>
                                             <v-layout column wrap>
-                                                <v-flex xs12 class="text-xs-center pa-2 text-font1">Drifting</v-flex>
-                                                <v-flex class="pl-2">
-                                                    <audio class="pa-2" controls>
-                                                        <source src="{{URL::asset('Samples/Drifting_KenanDavis_BenFox_8.12.18_Mix_v03.wav')}}" type="audio/wav">
+                                                <v-template v-for="sample in scdet.samples">
+                                                    <v-flex xs12 class="text-xs-center pa-2 text-font1">@{{sample.name}}</v-flex>
+                                                    <v-flex class="pl-2">
+                                                        <audio class="pa-2" controls>
+                                                            <source :src="sample.url" type="audio/wav">
                                                             Your browser does not support the audio element.
-                                                    </audio>
-                                                </v-flex>
-                                                <v-flex xs12 class="text-xs-center pa-2 text-font1">Keep All Your Money</v-flex>
-                                                <v-flex class="pl-2">
-                                                    <audio class="pa-2" controls>
-                                                        <source src="{{URL::asset('Samples/KeepAllYourMoney_BenFox_01.26.19_v04.wav')}}" type="audio/wav">
-                                                            Your browser does not support the audio element.
-                                                    </audio>
-                                                </v-flex>
-                                                <v-flex xs12 class="text-xs-center pa-2 text-font1">Next To Me</v-flex>
-                                                <v-flex class="pl-2">
-                                                    <audio class="pa-2" controls>
-                                                        <source src="{{URL::asset('Samples/NextToMe_ClaraRose_BenFox_01.26.19_Mix_v05.wav')}}" type="audio/wav">
-                                                            Your browser does not support the audio element.
-                                                    </audio>
-                                                </v-flex>
-                                                <v-flex xs12 class="text-xs-center pa-2 text-font1">Upstate</v-flex>
-                                                <v-flex class="pl-2">
-                                                    <audio class="pa-2" controls>
-                                                        <source src="{{URL::asset('Samples/Upstate_BenFox_01.26.19_Mix_v04.wav')}}" type="audio/wav">
-                                                            Your browser does not support the audio element.
-                                                    </audio>
-                                                </v-flex>
+                                                        </audio>
+                                                    </v-flex>
+                                                </v-template>
                                             </v-layout>
                                         </template>
                                         <template v-if="screen_type==3">
-                                            <v-flex xs12 class="text-xs-center pa-5 text-font1">Kiss Me</v-flex>
-                                            <v-flex class="pl-2">
-                                                <audio class="pl-2" controls>
-                                                    <source src="{{URL::asset('Samples/Kiss Me.wav')}}" type="audio/wav">
-                                                    Your browser does not support the audio element.
-                                                </audio>
-                                            </v-flex>
+                                            <v-template v-for="sample in scdet.samples">
+                                                <v-flex xs12 class="text-xs-center pa-2 text-font1">@{{sample.name}}</v-flex>
+                                                <v-flex class="pl-2">
+                                                    <audio class="pa-2" controls>
+                                                        <source :src="sample.url" type="audio/wav">
+                                                        Your browser does not support the audio element.
+                                                    </audio>
+                                                </v-flex>
+                                            </v-template>
                                         </template>
                                     </v-flex>
                                     <v-divider color="white" inset :vertical="!$vuetify.breakpoint.xsOnly"></v-divider>
@@ -152,7 +116,7 @@
                                     </v-flex>
                                     <template v-if='screen_type==3'>
                                         <v-flex xs6 class="text-xs-center pa-4 text-font1">Analysis example for 'kiss me' song:
-                                            <embed src="{{URL::asset('Samples/Kiss Me - website analisys - Voice 1-merged.pdf')}}" width="1250px" height="500px"/>
+                                            <embed src="{{URL::asset('storage/Samples/Analysis_docs/Kiss Me - website analisys - Voice 1-merged.pdf')}}" width="1250px" height="500px"/>
                                         </v-flex>
                                     </template>
                                 </v-layout>
@@ -345,7 +309,8 @@
                         v => /.+@.+/.test(v) || 'Mail must be a valid format!'
                     ]
                 },
-                services: [{
+                services: [
+                    {
                         sc: 1,
                         color: 'white',
                         colortext: 'black--text',
@@ -478,7 +443,8 @@
                             title: 'Song Writing',
                             details: this.services[0].details,
                             img: this.services[0].img_scr,
-                            submit: 'sign up for a free consultation'
+                            submit: 'sign up for a free consultation',
+                            samples:[],
                         };
                         break;
                     case 2:
@@ -486,7 +452,8 @@
                             title: 'Production/Mixing',
                             details: this.services[1].details,
                             img: this.services[1].img_scr,
-                            submit: 'sign up for a free consultation'
+                            submit: 'sign up for a free consultation',
+                            samples:[],
                         };
                         break;
                     case 3:
@@ -494,16 +461,32 @@
                             title: 'Song Critique',
                             details: this.services[2].details,
                             img: this.services[2].img_scr,
-                            submit: 'sign up for a free consultation'
+                            submit: 'sign up for a free consultation',
+                            samples:[],
                         };
                         break;
                 }
             },
+            getSamples:function(num){
+                $.ajax({
+                        url: '{{route("samples")}}',
+                        method: 'GET',
+                        dataType: 'json',
+                        data: {num:num},
+                        success:(response) => {
+                            this.scdet.samples = response;
+                            decodeURI(this.scdet.samples.url);
+                        },
+                        error:(response) => {
+                            this.notify("An error occurred! Please try again!", "red");
+                        }
+                    })
+            },
             linkopen: function (scnum) {
                 this.getscdet(scnum);
+                this.getSamples(scnum);
                 this.screen = 'services';
                 this.screen_type=scnum;
-
             },
         },
         mounted() {

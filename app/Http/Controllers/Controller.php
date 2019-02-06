@@ -55,11 +55,24 @@ class Controller extends BaseController
 
         return json_encode(array('error'=>false, 'message'=>'Mail sent successfully to: '.$rcpt));
     }
-
-    //Message to developer: tried to automize sample retrieving in version 1.0.1 (unreleased to production and deleted locally), but controller
-    // directories were in conflict with view settings, TO BE DONE IN THE FUTURE! (samples should be stored in different folders for
-    //each service and made in a way that the owner Bruno can just put them in a folder and the page will get them) Tried using storage facade
-    //which uses FileSystem documentation and a getSample() method, vuetify.js and vue.js make it pretty easy to make blade templates for multiple
-    //audio entries. Don't know if src param accepts binding, that may have been the problem. 
-
+    public function getSamples(Request $r){
+        $service = '';
+        if($r['num']==1)$service = 'Songwriting';
+        if($r['num']==2)$service = 'Production';
+        if($r['num']==3)$service = 'Analysis_songs';
+        $files = Storage::Files('public/Samples/'.$service);
+        $files[0]= '';
+        $samples = [];
+        foreach($files as $file){
+            if($file!=''){
+                $sample = ['name'=>'','url'=>''];
+                $sample['name']=explode('.',explode('/',$file)[3])[0];
+                //$url = "{{URL::asset('storage/Samples/".$service."/".explode('/',$file)[3]."')}}";
+                $url = "storage/Samples/".$service."/".explode('/',$file)[3];
+                $sample['url']=$url;
+                array_push($samples,$sample);
+            }
+        }
+    return $samples;
+    }
 }
