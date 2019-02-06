@@ -59,7 +59,7 @@ class Controller extends BaseController
         $service = '';
         if($r['num']==1)$service = 'Songwriting';
         if($r['num']==2)$service = 'Production';
-        if($r['num']==3)$service = 'Analysis_songs';
+        if($r['num']==3)$service = 'Analysis_Songs';
         $files = Storage::Files('public/Samples/'.$service);
         $samples = [];
         foreach($files as $file){
