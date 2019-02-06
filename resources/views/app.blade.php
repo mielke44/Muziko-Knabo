@@ -294,9 +294,7 @@
 <!--FIRST WORKING COMMIT VERSION 1.0 BY WILSON MIELKE-->
 @section('js')
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="{{asset('app/plugins/vue-resize/vue-resize.min.js')}}"></script>
 <script>
-    Vue.component('resize-observer', ResizeObserver)
     app = new Vue({
         el: '#app',
         created() {
