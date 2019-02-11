@@ -21,7 +21,7 @@
                             <v-flex class="text-xs-center text-font1-subheader">Our Services</v-flex>
                         </v-card-title>
                         <v-layout :column="$vuetify.breakpoint.xsOnly" row wrap>
-                            <v-flex class='pa-2' xs4 v-for='service in services'>
+                            <v-flex class='pa-2' xs4 :xs3="$vuetify.breakpoint.xsOnly" v-for='service in services'>
                                 <v-container fluid fill-height>
                                     <v-card style="background-color: rgba(0,0,0,0.6);" width="354" height="100%">
                                         <v-layout justify-space-between column fill-height>
@@ -106,7 +106,8 @@
                                         </template>
                                     </v-flex>
                                     <v-divider color="white" inset :vertical="!$vuetify.breakpoint.xsOnly"></v-divider>
-                                    <v-flex xs3 :xs4="$vuetify.breakpoint.xsOnly" class="mt-5 ml-5 mr-5 text-font-spaced">@{{scdet.details}}</v-flex>
+                                    <v-flex xs3 v-if="!$vuetify.breakpoint.xsOnly" class="mt-5 ml-5 mr-5 text-font-spaced">@{{scdet.details}}</v-flex>
+                                    <v-flex xs4 v-else class="text-font-spaced">@{{scdet.details}}</v-flex>
                                     <v-divider color="white" inset :vertical="!$vuetify.breakpoint.xsOnly"></v-divider>
                                     <v-flex xs4>
                                         <v-layout class="pt-5 mt-5" column align-center justify-center fill-heigth>
