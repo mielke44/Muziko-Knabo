@@ -14,14 +14,14 @@
                 </v-container>
             </v-img>
             <v-img  src="https://i.imgur.com/6m169yS.jpg">
-                <v-flex  class="pa-3 text-xs-center text-font2-title">Your Music Soaring</v-flex>
+                <v-flex class="text-xs-center text-font2-title">Your Music Soaring</v-flex>
                 <v-layout column wrap justify-center v-if="screen==0">
                     <v-card tile color="transparent">
                         <v-card-title>
                             <v-flex class="text-xs-center text-font1-subheader">Our Services</v-flex>
                         </v-card-title>
                         <v-layout :column="$vuetify.breakpoint.xsOnly" row wrap>
-                            <v-flex class='pa-2' xs4 :xs3="$vuetify.breakpoint.xsOnly" v-for='service in services'>
+                            <v-flex  v-for='service in services'>
                                 <v-container fluid fill-height>
                                     <v-card style="background-color: rgba(0,0,0,0.6);" width="354" height="100%">
                                         <v-layout justify-space-between column fill-height>
@@ -58,7 +58,7 @@
                         <v-flex class="text-xs-center pa-2 text-font1">Couldn't find the service you're looking for? Tell us what you want, we'll be happy to adapt our skills to your needs!</v-flex>
                     </v-card>
                 </v-layout>
-                <v-container class="pa-4 ma-0" v-if="screen=='services'" fluid>
+                <v-container class="pa-0 ma-0" v-if="screen=='services'" fluid>
                     <v-layout column wrap>
                         <v-flex>
                             <v-card tile style="background-color: rgba(0,0,0,0.6);">
@@ -66,7 +66,7 @@
                                     <v-flex class="text-xs-center text-font1-subheader">@{{scdet.title}}</v-flex>
                                 </v-toolbar>
                                 <v-layout :column="$vuetify.breakpoint.xsOnly" row wrap>
-                                    <v-flex xs4 class="pa-2 text-xs-center text-font1-subheader">Samples:
+                                    <v-flex :xs4="!$vuetify.breakpoint.xsOnly" xs3 class="pa-2 text-xs-center text-font1-subheader">Samples:
                                         <template v-if='screen_type==1'>
                                             <v-layout column wrap>
                                                 <v-template v-for="sample in scdet.samples">
@@ -94,21 +94,22 @@
                                             </v-layout>
                                         </template>
                                         <template v-if="screen_type==3">
-                                            <v-template v-for="sample in scdet.samples">
-                                                <v-flex xs12 class="text-xs-center pa-2 text-font1">@{{sample.name}}</v-flex>
-                                                <v-flex class="pl-2">
-                                                    <audio class="pa-2" controls>
-                                                        <source :src="sample.url" type="audio/wav">
-                                                        Your browser does not support the audio element.
-                                                    </audio>
-                                                </v-flex>
-                                            </v-template>
+                                            <v-layout column wrap>
+                                                <v-template v-for="sample in scdet.samples">
+                                                    <v-flex xs12 class="text-xs-center pa-2 text-font1">@{{sample.name}}</v-flex>
+                                                    <v-flex class="pl-2">
+                                                        <audio class="pa-2" controls>
+                                                            <source :src="sample.url" type="audio/wav">
+                                                            Your browser does not support the audio element.
+                                                        </audio>
+                                                    </v-flex>
+                                                </v-template>
+                                            </v-layout>
                                         </template>
                                     </v-flex>
-                                    <v-divider color="white" inset :vertical="!$vuetify.breakpoint.xsOnly"></v-divider>
-                                    <v-flex xs3 v-if="!$vuetify.breakpoint.xsOnly" class="mt-5 ml-5 mr-5 text-font-spaced">@{{scdet.details}}</v-flex>
-                                    <v-flex xs4 v-else class="text-font-spaced">@{{scdet.details}}</v-flex>
-                                    <v-divider color="white" inset :vertical="!$vuetify.breakpoint.xsOnly"></v-divider>
+                                    <v-divider color="white" :inset="!$vuetify.breakpoint.xsOnly" :vertical="!$vuetify.breakpoint.xsOnly"></v-divider>
+                                    <v-flex xs3 class="mt-5 ml-5 mr-5 text-font-spaced">@{{scdet.details}}</v-flex>
+                                    <v-divider color="white" :inset="!$vuetify.breakpoint.xsOnly" :vertical="!$vuetify.breakpoint.xsOnly"></v-divider>
                                     <v-flex xs4>
                                         <v-layout class="pt-5 mt-5" column align-center justify-center fill-heigth>
                                             <v-img class="mb-5" :src="scdet.img" width="300" height="200"></v-img>
