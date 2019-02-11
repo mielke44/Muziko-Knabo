@@ -40,9 +40,9 @@
                                                         <v-divider></v-divider>
                                                         <v-card-actions>
                                                             <v-layout align-center column fill-height>
-                                                                <v-btn class="text-xs-center text-font1  mb-2" color="blue"
+                                                                <v-btn class="text-xs-center text-font1  mb-2" color="white"
                                                                     @click="ask_popup_set" outline round>Got Questions?</v-btn>
-                                                                <v-btn class="text-xs-center text-font1" color="green"
+                                                                <v-btn class="text-xs-center text-font1" color="blue"
                                                                     @click='linkopen(service.sc);logoheight=350;background1=500;background2=500;'
                                                                     outline round block>View Examples</v-btn>
                                                             </v-layout>
@@ -143,12 +143,14 @@
                             </v-toolbar>
                             <v-form ref='form'>
                                 <v-card-text>
-                                    <v-text-field :rules="rules.name" v-model="form.name" label="Artist Name" required></v-text-field>
-                                    <v-text-field :rules="rules.songname" v-model="form.songname" label="Song Name"></v-text-field>
+                                    <v-text-field :rules="rules.name" v-model="form.name" label="Your Artist Name" required></v-text-field>
+                                    <v-text-field :rules="rules.songname" v-model="form.songname" label="Your Song Name"></v-text-field>
                                     <v-text-field :rules="rules.email" v-model="form.email" label="Your E-Mail"
                                         required></v-text-field>
                                     <v-select :rules="rules.name" v-model="form.service" :items="services" item-text="title"
                                         item-value="sc" label="Service" persistent-hint required></v-select>
+                                    <v-flex class="text-xs-center" color="light-grey">Send us links to songs you'd like to use as a reference</v-flex>
+                                    <v-text-field v-model="form.refs" label="Reference links"></v-text-field>
                                     <label>File
                                         <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
                                     </label>
@@ -285,7 +287,8 @@
                     name: '',
                     songname: '',
                     email: '',
-                    service: ''
+                    service: '',
+                    refs: '',
                 },
                 popup: false,
                 screen: 0,
@@ -408,6 +411,7 @@
                 formData.append('email', this.form.email);
                 formData.append('songname', this.form.songname);
                 formData.append('service', this.form.service);
+                formData.append('refs', this.form.refs);
                 app.confirm("Submitting your data", "Confirm?", "blue", () => {
                     this.loader=true;
                     axios.post('/submit',

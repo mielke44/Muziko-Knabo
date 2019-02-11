@@ -8,6 +8,8 @@
     <div style="text-align: center; color: #000000;">
         <p><strong>{{$data['name']}}</strong> has a request for you!</p>
         <p><strong>Songname: {{$data['songname']}}</strong></p>
+        <p><strong>Link to references:</strong></p>
+        <p><strong>{{$data['ref_link']}}</strong></p>
         <p><strong>Service requested: {{$data['service']}}</strong></p>
         <p><strong>Reply Mail: {{$data['sender']}}</strong></p>
 

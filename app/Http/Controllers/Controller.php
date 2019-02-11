@@ -23,13 +23,16 @@ class Controller extends BaseController
         $file=$r->file('file');
         //if($file->getClientSize()>10000)return json_encode(array('error'=>true,'message'=>'File size must be under 10MB!'));
         //if(!in_array($file->getClientMimeType(),$types))return json_encode(array('error'=>true,'message'=>'Audio File extension not accepted!'));
+        
         $data = [
             'Header' => 'Update from Soir Music',
             'name' => $r['name'],
             'songname' => $r['songname'],
             'sender' => $r['email'],
             'service' => $r['service'],
+            'ref_link' => $r['refs'],
         ];
+        if($r['refs']=='')$data['ref_link']='No references!';
         $path = Storage::disk('local')->putFileAs('',$file,$file->getClientOriginalName());
         Mail::send(new AttachedMail($data,$file->getClientOriginalName(),$path));
         Storage::delete($file->getClientOriginalName());
