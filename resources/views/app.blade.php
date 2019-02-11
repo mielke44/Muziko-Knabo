@@ -7,13 +7,13 @@
 <v-container class="pa-0 ma-0" fill-height fluid>
     <v-layout>
         <v-flex>
-            <v-img :height="background1" src="https://i.imgur.com/R13SHZd.jpg">
+            <v-img :height="background1" src="storage/Samples/images/background1.jpg">
                 <v-container class='ma-0 pa-0' fluid>
-                    <v-img @click="window.location='/'" src="https://i.imgur.com/6NltwwC.png" :height="logoheight"
+                    <v-img @click="window.location='/'" src="storage/Samples/images/logo.png" :height="logoheight"
                         contain alt></v-img>
                 </v-container>
             </v-img>
-            <v-img  src="https://i.imgur.com/6m169yS.jpg">
+            <v-img  src="storage/Samples/images/background2.jpg">
                 <v-flex class="text-xs-center text-font2-title">Your Music Soaring</v-flex>
                 <v-layout column wrap justify-center v-if="screen==0">
                     <v-card tile color="transparent">
@@ -117,9 +117,21 @@
                                         </v-layout>
                                     </v-flex>
                                     <template v-if='screen_type==3'>
-                                        <v-flex xs6 class="text-xs-center pa-4 text-font1">Analysis example for 'kiss me' song:
+                                        <v-flex v-if="!$vuetify.breakpoint.xsOnly" xs6 class="text-xs-center pa-4 text-font1">Analysis example for 'kiss me' song:
                                             <embed src="{{URL::asset('storage/Samples/Analysis_docs/Kiss Me - website analisys - Voice 1-merged.pdf')}}" width="1250px" height="500px"/>
                                         </v-flex>
+                                        <v-layout v-else column wrap>
+                                            <v-flex class="text-xs-center text-font1" @Click="song_popup=true">Click here for analysis examples!</v-flex>
+                                            <v-dialog v-model="song_popup" r>
+                                                <v-flex  xs12>
+                                                    <v-img src="storage/Samples/images/analysis1.png"></v-img>
+                                                    <v-img src="storage/Samples/images/analysis2.png"></v-img>
+                                                    <v-img src="storage/Samples/images/analysis3.png"></v-img>
+                                                    <v-img src="storage/Samples/images/analysis4.png"></v-img>
+                                                </v-flex>
+                                                <v-btn align-center round block color="blue" class="text-xs-center text-font1" @click="song_popup=false">Close</v-btn>
+                                            </v-dialog>
+                                        </v-layout>
                                     </template>
                                 </v-layout>
                                 <v-divider class="pa-3 pb-3" inset></v-divider>
@@ -282,8 +294,8 @@
                 screen_type:null,
                 ask_popup: false,
                 background1: 650,
-                background2: 750,
                 logoheight: 650,
+                song_popup:false,
                 file: '',
                 form: {
                     name: '',
@@ -319,8 +331,8 @@
                         sc: 1,
                         color: 'white',
                         colortext: 'black--text',
-                        img: "https://i.imgur.com/mnEWYU3.jpg",
-                        img_scr: "https://i.imgur.com/KXwOiUk.jpg",
+                        img: "storage/Samples/images/firstpage_SW.jpg",
+                        img_scr: "storage/Samples/images/secondpage_SW.jpg",
                         title: 'Songwriting',
                         details:"Work side by side with professional writers on developing a personalized song-concept and have experts working within your guidelines in order to build songs that translate your unique artistic vision and image. Our goal is to deliver music that translates everything you feel but can’t quite put into words or melodies, we don’t just want to write songs, we want to write YOUR songs.",
                         desc:"Work side by side with a professional songwriter on developing your artistic image and get personalized songs that translate your unique vision. Whether you’re a Pop, Country, R&B, Rock, Hip-Hop, Jazz, EDM, or any other style of artist, we’re committed to delivering songs you’ll wish you had written yourself.",
@@ -329,8 +341,8 @@
                         sc: 2,
                         color: 'white',
                         colortext: 'black--text',
-                        img: "https://i.imgur.com/oX2Vy0W.jpg",
-                        img_scr: "https://i.imgur.com/PWq7bmx.jpg",
+                        img: "storage/Samples/images/firstpage_PM.jpg",
+                        img_scr: "storage/Samples/images/secondpage_PM.jpg",
                         title: "Production/\nMixing",
                         details:"Wanna hear your music sound crystal-clear and as professional as you hear on the radio? Our producers and sound engineers are experts in building effective arrangements, mixing and mastering your songs in order to make them sound exactly as you hear in your head. Our mission is to enhance your musicality through sound-design and deliver cohesive and professional radio-ready tracks.",
                         desc:"Get your songs fully arranged, produced, mixed and mastered by one of our industry-top sound engineers. Our mission is to enhance your musical ideas through sound design and work according to your guidelines to deliver a completely personalized radio-ready track you’ll be proud to have your name under.",
@@ -339,8 +351,8 @@
                         sc: 3,
                         color: 'white',
                         colortext: 'black--text',
-                        img: "https://i.imgur.com/kF63ioC.jpg",
-                        img_scr: "https://i.imgur.com/1Qge5ZV.jpg",
+                        img: "storage/Samples/images/firstpage_AN.jpg",
+                        img_scr: "storage/Samples/images/firstpage_AN.jpg",
                         title: 'Song Critique',
                         details:"Motific development, melodic contrast, prosody, internal repetition, varied rhyme-schemes… these are just some of the techniques present in most of the hit songs over the last decades. Would you like a professional songwriter to go over your music note by note and word by word and break apart the secrets of how to make it even more effective? We’re here to help you bring your music to the next level and provide you with detailed straight-forward feedback on specific ways to improve your writing and become a hit-writer yourself.",
                         desc:"Are you tired of getting feedback like “it’s so cool”, “I like it” or “sounds a little off” from your friends and family? Have your music dissected note by note and word by word by both professional songwriters and producers to know exactly what’s working, what could use a second look and how to bring it closer to the sounds you hear in your head.",
