@@ -58,79 +58,89 @@
                         <v-flex class="mt-3 text-xs-center text-font1">Couldn't find the service you're looking for? Tell us what you want, we'll be happy to adapt our skills to your needs!</v-flex>
                     </v-card>
                 </v-layout>
-                <v-container class="pa-0 ma-0" v-if="screen=='services'" fluid>
-                    <v-layout column wrap>
+                <v-container class="pa-0 ma-0" v-if="screen=='services'" fluid align-center justify-center>
+                    <v-layout class="pa-0 ma-0" column wrap>
                         <v-flex>
                             <v-card tile style="background-color: rgba(0,0,0,0.6);">
-                                <v-toolbar card color="transparent">
-                                    <v-flex class="text-xs-center text-font1-subheader">@{{scdet.title}}</v-flex>
-                                </v-toolbar>
-                                <v-layout :column="$vuetify.breakpoint.xsOnly" row wrap>
-                                    <v-flex :xs4="!$vuetify.breakpoint.xsOnly" xs3 class="pa-2 text-xs-center text-font1-subheader">Samples:
+                                <v-card-title>
+                                    <v-toolbar card color="transparent">
+                                        <v-flex class="text-xs-center text-font1-subheader">@{{scdet.title}}</v-flex>
+                                    </v-toolbar>
+                                </v-card-title>
+                                <v-layout :column="$vuetify.breakpoint.xsOnly" align-center justify-center row wrap>
+                                    <v-flex xs3 class="text-xs-center text-font1-subheader">Samples:
                                         <template v-if='screen_type==1'>
-                                            <v-layout column wrap>
-                                                <v-template v-for="sample in scdet.samples">
-                                                    <v-flex xs12 class="text-xs-center pa-2 text-font1">@{{sample.name}}</v-flex>
-                                                    <v-flex class="pl-2">
-                                                        <audio class="pa-2" controls>
-                                                            <source :src="sample.url" type="audio/wav">
-                                                            Your browser does not support the audio element.
-                                                        </audio>
-                                                    </v-flex>
-                                                </v-template>
-                                            </v-layout>
+                                                <v-layout column wrap>
+                                                    <v-template v-for="sample in scdet.samples">
+                                                        <v-flex xs12 class="text-xs-center pa-2 text-font1">@{{sample.name}}</v-flex>
+                                                        <v-flex class="pl-2">
+                                                            <audio class="pa-2" controls>
+                                                                <source :src="sample.url" type="audio/wav">
+                                                                Your browser does not support the audio element.
+                                                            </audio>
+                                                        </v-flex>
+                                                    </v-template>
+                                                </v-layout>
                                         </template>
                                         <template v-if='screen_type==2'>
-                                            <v-layout column wrap>
-                                                <v-template v-for="sample in scdet.samples">
-                                                    <v-flex xs12 class="text-xs-center pa-2 text-font1">@{{sample.name}}</v-flex>
-                                                    <v-flex class="pl-2">
-                                                        <audio class="pa-2" controls>
-                                                            <source :src="sample.url" type="audio/wav">
-                                                            Your browser does not support the audio element.
-                                                        </audio>
-                                                    </v-flex>
-                                                </v-template>
-                                            </v-layout>
+                                                <v-layout column wrap>
+                                                    <v-template v-for="sample in scdet.samples">
+                                                        <v-flex xs12 class="text-xs-center pa-2 text-font1">@{{sample.name}}</v-flex>
+                                                        <v-flex class="pl-2">
+                                                            <audio class="pa-2" controls>
+                                                                <source :src="sample.url" type="audio/wav">
+                                                                Your browser does not support the audio element.
+                                                            </audio>
+                                                        </v-flex>
+                                                    </v-template>
+                                                </v-layout>
                                         </template>
                                         <template v-if="screen_type==3">
-                                            <v-layout column wrap>
-                                                <v-template v-for="sample in scdet.samples">
-                                                    <v-flex xs12 class="text-xs-center pa-2 text-font1">@{{sample.name}}</v-flex>
-                                                    <v-flex class="pl-2">
-                                                        <audio class="pa-2" controls>
-                                                            <source :src="sample.url" type="audio/wav">
-                                                            Your browser does not support the audio element.
-                                                        </audio>
-                                                    </v-flex>
-                                                </v-template>
-                                                <v-flex class="text-xs-center text-font1" @Click="song_popup=true">Click here for analysis examples!</v-flex>
-                                                <v-dialog v-model="song_popup" r>
-                                                    <v-flex  xs12>
-                                                        <v-img src="storage/Samples/images/analysis1.png"></v-img>
-                                                        <v-img src="storage/Samples/images/analysis2.png"></v-img>
-                                                        <v-img src="storage/Samples/images/analysis3.png"></v-img>
-                                                        <v-img src="storage/Samples/images/analysis4.png"></v-img>
-                                                    </v-flex>
-                                                    <v-btn align-center round block color="blue" class="text-xs-center text-font1" @click="song_popup=false">Close</v-btn>
-                                                </v-dialog>
-                                            </v-layout>
+                                                <v-layout column wrap>
+                                                    <v-template v-for="sample in scdet.samples">
+                                                        <v-flex xs12 class="text-xs-center pa-2 text-font1">@{{sample.name}}</v-flex>
+                                                        <v-flex class="pl-2">
+                                                            <audio class="pa-2" controls>
+                                                                <source :src="sample.url" type="audio/wav">
+                                                                Your browser does not support the audio element.
+                                                            </audio>
+                                                        </v-flex>
+                                                    </v-template>
+                                                    <v-flex  class="text-xs-center text-font1" @Click="song_popup=true">Click here for analysis examples!</v-flex>
+                                                    <v-dialog v-model="song_popup" r>
+                                                        <v-flex  xs12>
+                                                            <v-img src="storage/Samples/images/analysis1.png"></v-img>
+                                                            <v-img src="storage/Samples/images/analysis2.png"></v-img>
+                                                            <v-img src="storage/Samples/images/analysis3.png"></v-img>
+                                                            <v-img src="storage/Samples/images/analysis4.png"></v-img>
+                                                        </v-flex>
+                                                        <v-btn align-center round block color="blue" class="text-xs-center text-font1" @click="song_popup=false">Close</v-btn>
+                                                    </v-dialog>
+                                                </v-layout>
                                         </template>
                                     </v-flex>
                                     <v-divider color="white" :inset="!$vuetify.breakpoint.xsOnly" :vertical="!$vuetify.breakpoint.xsOnly"></v-divider>
-                                    <v-flex xs3 class="mt-5 ml-5 mr-5 text-font-spaced">@{{scdet.details}}</v-flex>
+                                    <v-flex xs4>
+                                        <v-card flat color='transparent'>
+                                            <v-card-text class="text-font-spaced">
+                                                @{{scdet.details}}
+                                            </v-card-text>
+                                        </v-card>
+                                    </v-flex>
                                     <v-divider color="white" :inset="!$vuetify.breakpoint.xsOnly" :vertical="!$vuetify.breakpoint.xsOnly"></v-divider>
                                     <v-flex xs4>
                                         <v-layout class="pt-5 mt-5" column align-center justify-center fill-heigth>
-                                            <v-img class="mb-5" :src="scdet.img" width="300" height="200"></v-img>
+                                            <v-img class="mb-5" :src="scdet.img" width="250" height="200"></v-img>
                                             <v-btn class="text-font1" color="blue" @click="popup=true" outline round>@{{scdet.submit}}</v-btn>
                                         </v-layout>
                                     </v-flex>
+                                    <!--
                                     <template v-if='screen_type==3'>
-                                        <v-flex v-if="!$vuetify.breakpoint.xsOnly" xs6 class="text-xs-center pa-4 text-font1">Analysis example for 'kiss me' song:
+                                        <v-flex v-if="!$vuetify.breakpoint.xsOnly" class="text-xs-center text-font1">Analysis example for 'kiss me' song:
                                             <embed src="{{URL::asset('storage/Samples/Analysis_docs/Kiss Me - website analisys - Voice 1-merged.pdf')}}" width="1250px" height="500px"/>
                                         </v-flex>
                                     </template>
+                                    -->
                                 </v-layout>
                                 <v-divider class="pa-3 pb-3" inset></v-divider>
                                 <v-card-action class="text-xs-center">
@@ -521,6 +531,7 @@
         font-family:Museo Sans W01_500;
         -webkit-text-stroke: 0.1px black;
         color: white;
+        display: block;
         text-align: justify;
         text-justify: inter-word;
         text-shadow:
@@ -533,10 +544,10 @@
     }
     .text-font-spaced{
         font-family:Museo Sans W01_500;
+        display: block;
         text-align: justify;
         text-justify: inter-word;
-        line-height: 2;
-        display: block;
+        line-height: 2.5;
         -webkit-text-stroke: 0.1px black;
         color: white;
         text-shadow:
