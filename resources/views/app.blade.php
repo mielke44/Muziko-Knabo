@@ -120,13 +120,16 @@
                                         </template>
                                     </v-flex>
                                     <v-divider color="white" :inset="!$vuetify.breakpoint.xsOnly" :vertical="!$vuetify.breakpoint.xsOnly"></v-divider>
+                                    <v-flex v-if="$vuetify.breakpoint.xsOnly" xs4 pa-4 class="text-font-spaced">@{{scdet.details}}
+                                    </v-flex>
                                     <v-flex xs4>
-                                        <v-card flat color='transparent'>
+                                        <v-card v-if="!$vuetify.breakpoint.xsOnly" color="transparent">
                                             <v-card-text class="text-font-spaced">
                                                 @{{scdet.details}}
                                             </v-card-text>
                                         </v-card>
                                     </v-flex>
+                                    
                                     <v-divider color="white" :inset="!$vuetify.breakpoint.xsOnly" :vertical="!$vuetify.breakpoint.xsOnly"></v-divider>
                                     <v-flex xs4>
                                         <v-layout class="pt-5 mt-5" column align-center justify-center fill-heigth>
