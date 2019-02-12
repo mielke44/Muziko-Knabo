@@ -22,12 +22,12 @@
                         </v-card-title>
                         <v-layout :column="$vuetify.breakpoint.xsOnly" row wrap>
                             <v-flex  v-for='service in services'>
-                                <v-container fluid fill-height>
+                                <v-container class='pa-0 mb-3' justify-center fluid fill-height>
                                     <v-card style="background-color: rgba(0,0,0,0.6);" width="354" height="100%">
                                         <v-layout justify-space-between column fill-height>
                                             <v-flex>
                                                 <v-card-title primary-title>
-                                                    <h3 class="ma-1 text-font1-subheader">@{{service.title}}</h3>
+                                                    <h3 class=" text-font1-subheader">@{{service.title}}</h3>
                                                 </v-card-title>
                                                 <v-card-text>
                                                     <v-img :src="service.img" aspect-ratio="3.0"></v-img>
@@ -43,7 +43,7 @@
                                                                 <v-btn class="text-xs-center text-font1  mb-2" color="white"
                                                                     @click="ask_popup_set" outline round>Got Questions?</v-btn>
                                                                 <v-btn class="text-xs-center text-font1" color="blue"
-                                                                    @click='linkopen(service.sc);logoheight=350;background1=500;background2=500;'
+                                                                    @click='linkopen(service.sc);logoheight=350;background1=500;'
                                                                     outline round block>View Examples</v-btn>
                                                             </v-layout>
                                                         </v-card-actions>
@@ -55,7 +55,7 @@
                                 </v-container>
                             </v-flex>
                         </v-layout>
-                        <v-flex class="text-xs-center pa-2 text-font1">Couldn't find the service you're looking for? Tell us what you want, we'll be happy to adapt our skills to your needs!</v-flex>
+                        <v-flex class="mt-3 text-xs-center text-font1">Couldn't find the service you're looking for? Tell us what you want, we'll be happy to adapt our skills to your needs!</v-flex>
                     </v-card>
                 </v-layout>
                 <v-container class="pa-0 ma-0" v-if="screen=='services'" fluid>
@@ -104,6 +104,16 @@
                                                         </audio>
                                                     </v-flex>
                                                 </v-template>
+                                                <v-flex class="text-xs-center text-font1" @Click="song_popup=true">Click here for analysis examples!</v-flex>
+                                                <v-dialog v-model="song_popup" r>
+                                                    <v-flex  xs12>
+                                                        <v-img src="storage/Samples/images/analysis1.png"></v-img>
+                                                        <v-img src="storage/Samples/images/analysis2.png"></v-img>
+                                                        <v-img src="storage/Samples/images/analysis3.png"></v-img>
+                                                        <v-img src="storage/Samples/images/analysis4.png"></v-img>
+                                                    </v-flex>
+                                                    <v-btn align-center round block color="blue" class="text-xs-center text-font1" @click="song_popup=false">Close</v-btn>
+                                                </v-dialog>
                                             </v-layout>
                                         </template>
                                     </v-flex>
@@ -120,18 +130,6 @@
                                         <v-flex v-if="!$vuetify.breakpoint.xsOnly" xs6 class="text-xs-center pa-4 text-font1">Analysis example for 'kiss me' song:
                                             <embed src="{{URL::asset('storage/Samples/Analysis_docs/Kiss Me - website analisys - Voice 1-merged.pdf')}}" width="1250px" height="500px"/>
                                         </v-flex>
-                                        <v-layout v-else column wrap>
-                                            <v-flex class="text-xs-center text-font1" @Click="song_popup=true">Click here for analysis examples!</v-flex>
-                                            <v-dialog v-model="song_popup" r>
-                                                <v-flex  xs12>
-                                                    <v-img src="storage/Samples/images/analysis1.png"></v-img>
-                                                    <v-img src="storage/Samples/images/analysis2.png"></v-img>
-                                                    <v-img src="storage/Samples/images/analysis3.png"></v-img>
-                                                    <v-img src="storage/Samples/images/analysis4.png"></v-img>
-                                                </v-flex>
-                                                <v-btn align-center round block color="blue" class="text-xs-center text-font1" @click="song_popup=false">Close</v-btn>
-                                            </v-dialog>
-                                        </v-layout>
                                     </template>
                                 </v-layout>
                                 <v-divider class="pa-3 pb-3" inset></v-divider>
@@ -145,7 +143,7 @@
                             </v-card>
                         </v-flex>
                     </v-layout>
-                    <v-flex class="text-xs-center pa-2 text-font1">Couldn't find the service you're looking for? Tell us what you want, we'll be happy to adapt our skills to your needs!</v-flex>
+                    <v-flex class="text-xs-center text-font1">Couldn't find the service you're looking for? Tell us what you want, we'll be happy to adapt our skills to your needs!</v-flex>
                 </v-container>
                 <v-dialog v-model="popup" max-width="500" r>
                     <v-flex xs12>
