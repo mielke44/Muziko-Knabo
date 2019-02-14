@@ -7,6 +7,7 @@
     <p style="text-align: center; color: #000000;">&nbsp;</p>
     <div style="text-align: center; color: #000000;">
         <p><strong>{{$data['name']}}</strong> has rated the website!</p>
+        <p><strong>Service: {{$data['service']}}</strong></p>
         <p><strong>Rating: {{$data['rating']}}</strong></p>
         <p><strong>Suggestion/Comment: {{$data['rate']}}</strong></p>
     </div>

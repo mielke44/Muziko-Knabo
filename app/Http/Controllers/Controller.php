@@ -89,9 +89,10 @@ class Controller extends BaseController
         $rate->rate = $r['form']['rating'];
         $rate->service = $r['service'];
         $data = [
-            'name' => $r['name'],
-            'rate' => $r['rate'],
-            'rating' => $r['rating'],
+            'name' => $r['form']['name'],
+            'rate' => $r['form']['rate'],
+            'rating' => $r['form']['rating'],
+            'service' => $r['service']
         ];
         $rcpt = "contact.brunorios@gmail.com";
         $rate->save();

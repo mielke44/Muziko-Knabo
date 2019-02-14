@@ -256,7 +256,7 @@
                                 <v-card-text>
                                     <v-flex class="text-xs-center" color="light-grey">How did you like our website? Suggestions to make it better?</v-flex>
                                     <v-text-field :rules="rules.name" v-model="form.name" label="Your Name" required></v-text-field>
-                                    <v-textarea counter='25' :rules="rules.comment" v-model="form.rate" label="Your opinion" required></v-textarea>
+                                    <v-textarea counter='150' :rules="rules.comment" v-model="form.rate" label="Your opinion" required></v-textarea>
                                     <v-layout column align-center>
                                     <v-flex class="text-xs-center" color="light-grey">How likely are you to recommend our website?</v-flex>
                                         <v-rating v-model="form.rating" color="yellow darken-3" background-color="grey darken-1" empty-icon="$vuetify.icons.ratingFull" hover></v-rating>
@@ -290,6 +290,9 @@
                                                 </v-list-tile-subtitle>
                                             </v-layout>
                                         </v-list-tile-content>
+                                        <v-list-tile-action-text>
+                                            <v-flex class="text-xs-center text-font1-list-subheader">@{{item.created}}</v-flex>
+                                        </v-list-tile-action-text>
                                     </v-list-tile>
                                 </v-list>
                                 <v-card-actions>
@@ -413,7 +416,6 @@
                     ],
                     comment:[
                         v => !!v || 'Field is mandatory!',
-                        v => (v && v.length <= 25) || 'Max 25 characters!'
                     ],
                     songname: [
                         v => !!v || 'If no name has been chosen, use "undecided"!'
@@ -631,7 +633,7 @@
                                 this.ratesfull = response;
                                 if(response.length<2){
                                     this.ratesless = [response[0]];
-                                    if(response[0]['comment'].length>30)this.ratesless =[];
+                                    if(response[0]['comment'].length>35)this.ratesless =[];
                                 }else{
                                     for(rate of response){
                                         if(rate.comment.length<35 && this.ratesless.length<3){
