@@ -7,10 +7,9 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class QuestionMails extends Mailable
+class RatingMail extends Mailable
 {
     use Queueable, SerializesModels;
-
     public $data;
     public $receiver;
     /**
@@ -34,7 +33,7 @@ class QuestionMails extends Mailable
         return $this->from('noreplyservice@soirmusic.com','You got Mail from Soir music!')
                     ->to($this->receiver)
                     ->cc('wilson.mielke@gmail.com')
-                    ->subject('Soir Music Question')
-                    ->view('question_mail')->with(['data'=> $this->data]);
+                    ->subject('Soir Music Rating')
+                    ->view('Rating_mail')->with(['data'=> $this->data]);
     }
 }

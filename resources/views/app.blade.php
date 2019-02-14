@@ -16,7 +16,7 @@
             <v-img  src="storage/Samples/images/background2.jpg">
                 <v-flex class="text-xs-center text-font2-title">Your Music Soaring</v-flex>
                 <v-layout column wrap justify-center v-if="screen==0">
-                    <v-card tile color="transparent">
+                    <v-card flat tile color="transparent">
                         <v-card-title>
                             <v-flex class="text-xs-center text-font1-subheader">Our Services</v-flex>
                         </v-card-title>
@@ -68,7 +68,7 @@
                                     </v-toolbar>
                                 </v-card-title>
                                 <v-layout :column="$vuetify.breakpoint.xsOnly" align-center justify-center row wrap>
-                                    <v-flex xs3 class="text-xs-center text-font1-subheader">Samples:
+                                    <v-flex xs4 class="text-xs-center text-font1-subheader">Samples:
                                         <template v-if='screen_type==1'>
                                                 <v-layout column wrap>
                                                     <v-template v-for="sample in scdet.samples">
@@ -107,45 +107,65 @@
                                                         </v-flex>
                                                     </v-template>
                                                     <v-flex  class="text-xs-center text-font1" @Click="song_popup=true">Click here for analysis examples!</v-flex>
-                                                    <v-dialog v-model="song_popup" r>
-                                                        <v-flex  xs12>
-                                                            <v-img src="storage/Samples/images/analysis1.png"></v-img>
-                                                            <v-img src="storage/Samples/images/analysis2.png"></v-img>
-                                                            <v-img src="storage/Samples/images/analysis3.png"></v-img>
-                                                            <v-img src="storage/Samples/images/analysis4.png"></v-img>
-                                                        </v-flex>
-                                                        <v-btn align-center round block color="blue" class="text-xs-center text-font1" @click="song_popup=false">Close</v-btn>
+                                                    <v-dialog  overflow v-model="song_popup" max-width="600" r>
+                                                        <v-card style="background-color: transparent;">
+                                                            <v-flex class="text-xs-center">
+                                                                <v-img src="storage/Samples/images/analysis1.png"></v-img>
+                                                                <v-img src="storage/Samples/images/analysis2.png"></v-img>
+                                                                <v-img src="storage/Samples/images/analysis3.png"></v-img>
+                                                                <v-img src="storage/Samples/images/analysis4.png"></v-img>
+                                                            </v-flex>
+                                                            <v-flex  class="text-xs-center">
+                                                                <v-btn color="blue"  @click="song_popup=false" icon>
+                                                                    <v-icon>close</v-icon>
+                                                                </v-btn>
+                                                            </v-flex>
+                                                        </v-card>
                                                     </v-dialog>
                                                 </v-layout>
                                         </template>
                                     </v-flex>
                                     <v-divider color="white" :inset="!$vuetify.breakpoint.xsOnly" :vertical="!$vuetify.breakpoint.xsOnly"></v-divider>
-                                    <v-flex v-if="$vuetify.breakpoint.xsOnly" xs4 pa-4 class="text-font-spaced">@{{scdet.details}}
+                                    <v-flex v-if="$vuetify.breakpoint.xsOnly" xs4 pa-4 class="text-font-spaced text-xs-center">@{{scdet.details}}
                                     </v-flex>
                                     <v-flex xs4>
-                                        <v-card v-if="!$vuetify.breakpoint.xsOnly" color="transparent">
+                                        <v-card flat class="text-xs-center" v-if="!$vuetify.breakpoint.xsOnly" color="transparent">
                                             <v-card-text class="text-font-spaced">
                                                 @{{scdet.details}}
                                             </v-card-text>
                                         </v-card>
                                     </v-flex>
-                                    
                                     <v-divider color="white" :inset="!$vuetify.breakpoint.xsOnly" :vertical="!$vuetify.breakpoint.xsOnly"></v-divider>
-                                    <v-flex xs4>
-                                        <v-layout class="pt-5 mt-5" column align-center justify-center fill-heigth>
+                                    <v-flex class="text-xs-center">
+                                        <v-layout class="pt-3 mt-3 pb-5" column align-center justify-center fill-heigth>
                                             <v-img class="mb-5" :src="scdet.img" width="250" height="200"></v-img>
                                             <v-btn class="text-font1" color="blue" @click="popup=true" outline round>@{{scdet.submit}}</v-btn>
+                                            <v-btn class="text-font1" color="yellow darken-3" @click="ratings=true" outline round>Rate our website and services!</v-btn>
                                         </v-layout>
-                                    </v-flex>
-                                    <!--
-                                    <template v-if='screen_type==3'>
-                                        <v-flex v-if="!$vuetify.breakpoint.xsOnly" class="text-xs-center text-font1">Analysis example for 'kiss me' song:
-                                            <embed src="{{URL::asset('storage/Samples/Analysis_docs/Kiss Me - website analisys - Voice 1-merged.pdf')}}" width="1250px" height="500px"/>
+                                        <v-flex class="text-font1-subheader text-xs-center">Latest user ratings:</v-flex>
+                                        <v-list v-if="ratesless.length>0" three-line style="background-color: rgba(0,0,0,0.0);">
+                                            <v-list-tile v-for="item in ratesless">
+                                                <v-list-tile-content>
+                                                    <v-layout row wrap>
+                                                        <v-list-tile-title class="text-font1" v-text="item.name"></v-list-tile-title>
+                                                        <v-list-tile-subtitle>
+                                                            <v-flex class="text-font1-list-subheader">@{{item.comment}}</v-flex>
+                                                            <v-rating dense small v-model="item.rate" color="yellow darken-3" background-color="white" empty-icon="$vuetify.icons.ratingFull" half-increments readonly></v-rating>
+                                                        </v-list-tile-subtitle>
+                                                    </v-layout>
+                                                </v-list-tile-content>
+                                                <v-list-tile-action-text>
+                                                    <v-flex class="text-xs-center text-font1-list-subheader">@{{item.created}}</v-flex>
+                                                </v-list-tile-action-text>
+                                            </v-list-tile>
+                                        </v-list>
+                                        <v-flex v-if="ratesless.length>0" class='text-xs-center text-font1'>
+                                            <v-btn outline round color="yellow darken-3" @click="allrates=true">See all</v-btn>
                                         </v-flex>
-                                    </template>
-                                    -->
+                                        <v-flex v-if="ratesless.length==0" class="text-xs-center text-font1">No ratings so far! Be the first to rate this service!</v-flex>
+                                    </v-flex>
                                 </v-layout>
-                                <v-divider class="pa-3 pb-3" inset></v-divider>
+                                <v-divider class="pa-3 pb-3" :inset="!$vuetify.breakpoint.xsOnly" ></v-divider>
                                 <v-card-action class="text-xs-center">
                                     <v-flex xs12 class='text-xs-center'>
                                         <v-btn icon color='blue' @click="window.location='/';logoheight=650">
@@ -224,13 +244,69 @@
                         </v-card>
                     </v-flex>
                 </v-dialog>
+                <v-dialog v-model="ratings" max-width="500" r>
+                    <v-flex xs12>
+                        <v-card>
+                            <v-toolbar card color="blue">
+                                <v-flex>
+                                    <h3 class="headline mb-0 text-xs-center">Rate us!</h3>
+                                </v-flex>
+                            </v-toolbar>
+                            <v-form ref='rate'>
+                                <v-card-text>
+                                    <v-flex class="text-xs-center" color="light-grey">How did you like our website? Suggestions to make it better?</v-flex>
+                                    <v-text-field :rules="rules.name" v-model="form.name" label="Your Name" required></v-text-field>
+                                    <v-textarea counter='25' :rules="rules.comment" v-model="form.rate" label="Your opinion" required></v-textarea>
+                                    <v-layout column align-center>
+                                    <v-flex class="text-xs-center" color="light-grey">How likely are you to recommend our website?</v-flex>
+                                        <v-rating v-model="form.rating" color="yellow darken-3" background-color="grey darken-1" empty-icon="$vuetify.icons.ratingFull" hover></v-rating>
+                                    </v-layout>
+                                </v-card-text>
+                            </v-form>
+                            <v-card-actions>
+                                <v-flex xs12 class='text-xs-center'>
+                                    <v-btn color='blue' @click='submit_rating(scdet.title)'>Submit!</v-btn>
+                                </v-flex>
+                            </v-card-actions>
+                        </v-card>
+                    </v-flex>
+                </v-dialog>
+                <v-dialog v-model="allrates" max-width="500" r>
+                        <v-flex xs12>
+                            <v-card style="background-color: rgba(255,255,255,1);">
+                                <v-toolbar card color="blue">
+                                    <v-flex>
+                                        <h3 class="headline mb-0 text-xs-center">All Ratings</h3>
+                                    </v-flex>
+                                </v-toolbar>
+                                <v-list two-line>
+                                    <v-list-tile v-for="item in ratesfull" :key="item.name">
+                                        <v-list-tile-content>
+                                            <v-layout row wrap>
+                                                <v-list-tile-title v-text="item.name"></v-list-tile-title>
+                                                <v-list-tile-subtitle>
+                                                    <v-flex style="font-size: 10pt" v-text="item.comment"></v-flex>
+                                                    <v-rating dense small v-model="item.rate" color="yellow darken-3" background-color="light-grey" empty-icon="$vuetify.icons.ratingFull" half-increments readonly></v-rating>
+                                                </v-list-tile-subtitle>
+                                            </v-layout>
+                                        </v-list-tile-content>
+                                    </v-list-tile>
+                                </v-list>
+                                <v-card-actions>
+                                    <v-flex xs12 class='text-xs-center'>
+                                        <v-btn color='blue' @click="allrates=false">Close</v-btn>
+                                    </v-flex>
+                                </v-card-actions>
+                            </v-card>
+                        </v-flex>
+                    </v-dialog>
             </v-img>
         </v-flex>
     </v-layout>
 </v-container>
 
 <!--SNACKBAR NOTIFY-->
-<v-snackbar v-model="snackbar_notify.model" multi-line timeout="3000" bottom right :color='snackbar_notify.color'>
+<v-snackbar v-model="snackbar_notify.model" multi-line timeout="9000" bottom right :color='snackbar_notify.color'>
     @{{snackbar_notify.text}}
     <v-btn flat @click.native="snackbar_notify.model = false">
         <v-icon>clear</v-icon>
@@ -301,6 +377,10 @@
         },
         data() {
             return {
+                allrates:false,
+                ratesless:[],
+                ratesfull:[],
+                ratings:false,
                 loader:false,
                 screen_type:null,
                 ask_popup: false,
@@ -314,6 +394,8 @@
                     email: '',
                     service: '',
                     refs: '',
+                    rate:'',
+                    rating:'',
                 },
                 popup: false,
                 screen: 0,
@@ -328,6 +410,10 @@
                 rules: {
                     name: [
                         v => !!v || 'Field is mandatory!'
+                    ],
+                    comment:[
+                        v => !!v || 'Field is mandatory!',
+                        v => (v && v.length <= 25) || 'Max 25 characters!'
                     ],
                     songname: [
                         v => !!v || 'If no name has been chosen, use "undecided"!'
@@ -397,6 +483,7 @@
             },
             submit_question: function () {
                 app.confirm("Submitting your Question", "Confirm?", "blue", () => {
+                    this.loader=true;
                     $.ajax({
                         url: '{{route("submitquestion")}}',
                         method: 'POST',
@@ -406,11 +493,34 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         success:(response) => {
-                        this.notify("Question sent successfully!", "green");
-                        this.ask_popup = false;
+                            this.loader=false;
+                            this.notify("Question sent successfully!", "green");
+                            this.ask_popup = false;
                         },
                         error:(response) => {
-                            alert(JSON.stringify(response));
+                            this.notify("An error occurred! Please try again!", "red");
+                        }
+                    })
+                })
+            },
+            submit_rating: function (service) {
+                app.confirm("Submitting your ratings", "Confirm?", "blue", () => {
+                    this.loader=true;
+                    $.ajax({
+                        url: '{{route("submitrating")}}',
+                        method: 'POST',
+                        dataType: 'json',
+                        data: {form:this.form,service:service},
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success:(response) => {
+                            this.loader=false;
+                            this.notify("Thank you for rating us!", "green");
+                            this.ratings = false;
+                            this.getrates(service);
+                        },
+                        error:(response) => {
                             this.notify("An error occurred! Please try again!", "red");
                         }
                     })
@@ -504,7 +614,33 @@
                         data: {num:num},
                         success:(response) => {
                             this.scdet.samples = response;
-                            decodeURI(this.scdet.samples.url);
+                        },
+                        error:(response) => {
+                            this.notify("An error occurred! Please try again!", "red");
+                        }
+                    })
+            },
+            getrates:function(num){
+                $.ajax({
+                        url: '{{route("rates")}}',
+                        method: 'GET',
+                        dataType: 'json',
+                        data: {num:num},
+                        success:(response) => {
+                            if(response!='no rates'){
+                                this.ratesfull = response;
+                                if(response.length<2){
+                                    this.ratesless = [response[0]];
+                                    if(response[0]['comment'].length>30)this.ratesless =[];
+                                }else{
+                                    for(rate of response){
+                                        if(rate.comment.length<35 && this.ratesless.length<3){
+                                            var ArrayIndex=response.indexOf(rate);
+                                            if(response.length!=ArrayIndex)this.ratesless.push(rate);
+                                        }
+                                    }
+                                }
+                            }
                         },
                         error:(response) => {
                             this.notify("An error occurred! Please try again!", "red");
@@ -512,6 +648,7 @@
                     })
             },
             linkopen: function (scnum) {
+                this.getrates(scnum)
                 this.getscdet(scnum);
                 this.getSamples(scnum);
                 this.screen = 'services';
@@ -544,6 +681,21 @@
             -1px 1px 0 #000,
             1px 1px 0 #000;
         font-size: 14pt;
+    }
+    .text-font1-list-subheader{
+        font-family:Museo Sans W01_500;
+        -webkit-text-stroke: 0.1px black;
+        color: lightgray;
+        display: block;
+        text-align: justify;
+        text-justify: inter-word;
+        text-shadow:
+            1px 1px 0 #000,
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+        font-size: 10pt;
     }
     .text-font-spaced{
         font-family:Museo Sans W01_500;

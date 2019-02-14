@@ -2177,7 +2177,7 @@
 }
 html {
   box-sizing: border-box;
-  overflow-y: scroll; /* All browsers without overlaying scrollbars */
+  overflow-y: hidden; /* All browsers without overlaying scrollbars */
   -webkit-text-size-adjust: 100%; /* iOS 8+ */
 }
 *,
@@ -2200,7 +2200,7 @@ audio:not([controls]) {
   height: 0;
 }
 hr {
-  overflow: visible; /* Show the overflow in Edge and IE */
+  overflow: hidden; /* Show the overflow in Edge and IE */
 }
 article,
 aside,
@@ -2292,7 +2292,7 @@ button,
   -webkit-appearance: none; /* Safari 8 */
 }
 textarea {
-  overflow: auto; /* Internet Explorer 11+ */
+  overflow: hidden; /* Internet Explorer 11+ */
   resize: vertical; /* Specify textarea resizability */
 }
 button,
@@ -2771,6 +2771,7 @@ kbd {
 html {
   font-size: 14px;
   overflow-x: hidden;
+  overflow-y: hidden;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -9,10 +9,12 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AttachedMail;
 use App\Mail\QuestionMails;
+use App\Mail\RatingMail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Http\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use App\Rate;
 
 class Controller extends BaseController
 {
@@ -58,6 +60,45 @@ class Controller extends BaseController
 
         return json_encode(array('error'=>false, 'message'=>'Mail sent successfully to: '.$rcpt));
     }
+
+    public function getRatings(Request $r){
+        $service='';
+        switch($r['num']){
+            case 1: $service="Song Writing";
+                    break;
+            case 2: $service="Production/Mixing";
+                    break;
+            case 3:$service="Song Critique";
+                    break;
+        }
+        $ratings = Rate::where('service',$service)->orderBy('created_at','desc')->get();
+        foreach($ratings as $rate){
+            $rate['created']=explode(' ',$rate['created_at'])[0];
+            //if($rate['rate']<4)
+            //if($index=array_search($rate['rate'], $ratings) !== false)unset($ratings[$index]);
+        }
+        if(count($ratings)>0)return json_encode($ratings);
+        else return json_encode('no rates');
+        
+    }
+
+    public function SubmitRatings(Request $r){
+        $rate = new Rate();
+        $rate->name= $r['form']['name'];
+        $rate->comment = $r['form']['rate'];
+        $rate->rate = $r['form']['rating'];
+        $rate->service = $r['service'];
+        $data = [
+            'name' => $r['name'],
+            'rate' => $r['rate'],
+            'rating' => $r['rating'],
+        ];
+        $rcpt = "contact.brunorios@gmail.com";
+        $rate->save();
+        Mail::send(new RatingMail($data,$rcpt));
+        return json_encode(array('error'=>false, 'message'=>'Mail sent successfully to: '.$rcpt));
+    }
+
     public function getSamples(Request $r){
         $service = '';
         if($r['num']==1)$service = 'Songwriting';
@@ -69,10 +110,9 @@ class Controller extends BaseController
             if($file!=''){
                 $sample = ['name'=>'','url'=>''];
                 $sample['name']=explode('.',explode('/',$file)[3])[0];
-                //$url = "{{URL::asset('storage/Samples/".$service."/".explode('/',$file)[3]."')}}";
                 $url = "storage/Samples/".$service."/".explode('/',$file)[3];
                 $sample['url']=$url;
-                array_push($samples,$sample);
+                if($sample['name']!='')array_push($samples,$sample);
             }
         }
     return $samples;
