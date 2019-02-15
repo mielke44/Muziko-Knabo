@@ -136,7 +136,7 @@
                                         </v-card>
                                     </v-flex>
                                     <v-divider color="white" :inset="!$vuetify.breakpoint.xsOnly" :vertical="!$vuetify.breakpoint.xsOnly"></v-divider>
-                                    <v-flex class="text-xs-center">
+                                    <v-flex xs4 class="text-xs-center">
                                         <v-layout class="pt-3 mt-3 pb-5" column align-center justify-center fill-heigth>
                                             <v-img class="mb-5" :src="scdet.img" width="250" height="200"></v-img>
                                             <v-btn class="text-font1" color="blue" @click="popup=true" outline round>@{{scdet.submit}}</v-btn>
@@ -149,7 +149,7 @@
                                                     <v-layout row wrap>
                                                         <v-list-tile-title class="text-font1" v-text="item.name"></v-list-tile-title>
                                                         <v-list-tile-subtitle>
-                                                            <v-flex xs3 class="text-font1-list-subheader">@{{item.comment}}</v-flex>
+                                                            <v-flex class="text-font1-list-subheader">@{{item.comment}}</v-flex>
                                                             <v-rating dense small v-model="item.rate" color="yellow darken-3" background-color="white" empty-icon="$vuetify.icons.ratingFull" readonly></v-rating>
                                                         </v-list-tile-subtitle>
                                                     </v-layout>
