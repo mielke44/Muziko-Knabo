@@ -201,7 +201,7 @@
                                     </label>
                                     <v-flex class="text-xs-center" color="light-grey">Accepted audio extensions: au,
                                         snd, mid, rmi, mp3, mp4, wav</v-flex>
-                                    <v-flex class="text-xs-center" color="light-grey">Max file size: 10MB</v-flex>
+                                    <v-flex class="text-xs-center" color="light-grey">Max file size:@{{maxFileSize}}</v-flex>
                                     <v-spacer></v-spacer>
                                     <v-divider></v-divider>
                                     <v-flex class="text-xs-center" color="light-grey">* submitting your song will only
@@ -385,11 +385,12 @@
                 ratesfull:[],
                 ratings:false,
                 loader:false,
-                screen_type:null,
+                screen_type:0,
                 ask_popup: false,
                 background1: 650,
                 logoheight: 650,
                 song_popup:false,
+                maxFileSize:'',
                 file: '',
                 form: {
                     name: '',
@@ -401,14 +402,8 @@
                     rating:'',
                 },
                 popup: false,
-                screen: 0,
-                scdet: {
-                    title: '',
-                    samples: '',
-                    img: '',
-                    submit: '',
-                    details: ''
-                },
+                screen:0,
+                scdet: {},
                 drawer: null,
                 rules: {
                     name: [
@@ -559,21 +554,20 @@
                                 }
                             }).then(response => {
                                 this.loader=false;
+                                if(response['data']['error'])this.notify(response['data']['message'],'red')
+                                else{
                                 this.popup = false;
-                                this.form = {
-                                    name: '',
-                                    songname: '',
-                                    email: '',
-                                    service: ''
-                                };
+                                this.form = {name: '',songname: '',email: '',service: ''};
                                 this.notify(
                                     "DONE! You'll receive a response e-mail from our experts ASAP!",
                                     "green");
+                                }
                         })
                         .catch(response => {
                             this.loader=false;
-                            console.log(JSON.stringify(response['response']['data']['message']))
-                            this.notify('An Error Occurred! Please try again!', 'red');
+                            console.log(JSON.stringify(response['response']['status']))
+                            if(JSON.stringify(response['response']['status'])=='413')this.notify("File Size is larger than accepted!","red")
+                            else this.notify('An Error Occurred! Please try again!', 'red');
                         });
                 })
             },
@@ -622,6 +616,19 @@
                         }
                     })
             },
+            getSize:function(){
+                $.ajax({
+                        url: '{{route("filesize")}}',
+                        method: 'GET',
+                        dataType: 'json',
+                        success:(response) => {
+                            this.maxFileSize = response;
+                        },
+                        error:(response) => {
+                            this.notify('An error occured, please refresh!', "red");
+                        }
+                    })
+            },
             getrates:function(num){
                 $.ajax({
                         url: '{{route("rates")}}',
@@ -653,6 +660,7 @@
                 this.getrates(scnum)
                 this.getscdet(scnum);
                 this.getSamples(scnum);
+                this.getSize();
                 this.screen = 'services';
                 this.screen_type=scnum;
             },

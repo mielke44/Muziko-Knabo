@@ -21,10 +21,9 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function Submit(Request $r){
-        $types = ['audio/basic','audio/mid','audio/mpeg','audio/mp4','audio/vnd.wav','application/octet-stream'];
+        $types = ['mp3','wav','mp4','au','snd','mid','rmi'];
         $file=$r->file('file');
-        //if($file->getClientSize()>10000)return json_encode(array('error'=>true,'message'=>'File size must be under 10MB!'));
-        //if(!in_array($file->getClientMimeType(),$types))return json_encode(array('error'=>true,'message'=>'Audio File extension not accepted!'));
+        if(!in_array($file->getClientOriginalExtension(),$types))return json_encode(array('error'=>true,'message'=>'File extension not accepted!'));
         
         $data = [
             'Header' => 'Update from Soir Music',
@@ -35,7 +34,13 @@ class Controller extends BaseController
             'ref_link' => $r['refs'],
         ];
         if($r['refs']=='')$data['ref_link']='No references!';
+
+        $details=array('size'=>$file->getClientSize(),'MIME'=>$file->getClientMimeType(),'name'=>$file->getClientOriginalName(),'ext'=>$file->getClientOriginalExtension());
+
         $path = Storage::disk('local')->putFileAs('',$file,$file->getClientOriginalName());
+        //files get uploaded to Project/Storage/app/
+        print_r($details);
+        return;
         Mail::send(new AttachedMail($data,$file->getClientOriginalName(),$path));
         Storage::delete($file->getClientOriginalName());
         return json_encode(array('error'=>false, 'message'=>'Mail sent successfully!'));
@@ -116,6 +121,21 @@ class Controller extends BaseController
                 if($sample['name']!='')array_push($samples,$sample);
             }
         }
-    return $samples;
+        return $samples;
     }
+
+    function fileUploadMaxSize() {
+        // Start with post_max_size.
+        $post_max_size = ini_get('post_max_size');
+        if ($post_max_size > 0) {
+            $max_size = $post_max_size;
+        }
+        // If upload_max_size is less, then reduce. Except if upload_max_size is
+        // zero, which indicates no limit.
+        $upload_max =ini_get('upload_max_filesize');
+        if ($upload_max > 0 && $upload_max < $max_size) {
+            $max_size = $upload_max;
+        }
+    return json_encode($max_size.'B');
+    }   
 }
