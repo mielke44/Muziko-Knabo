@@ -10,7 +10,7 @@
     <title>@yield('title')</title>
 </head>
 
-<body>
+<body style="overflow: hidden;">
     <div id="app">
         <v-app>
             <template>
