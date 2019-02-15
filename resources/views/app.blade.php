@@ -68,7 +68,7 @@
                                     </v-toolbar>
                                 </v-card-title>
                                 <v-layout :column="$vuetify.breakpoint.xsOnly" align-center justify-center row wrap>
-                                    <v-flex class="text-xs-center text-font1-subheader">Samples:
+                                    <v-flex class="text-xs-center text-font1-subheader">Examples:
                                         <template v-if='screen_type==1'>
                                                 <v-layout column wrap>
                                                     <v-template v-for="sample in scdet.samples">
@@ -136,7 +136,7 @@
                                         </v-card>
                                     </v-flex>
                                     <v-divider color="white" :inset="!$vuetify.breakpoint.xsOnly" :vertical="!$vuetify.breakpoint.xsOnly"></v-divider>
-                                    <v-flex xs4 class="text-xs-center">
+                                    <v-flex xs4 class="pr-2 text-xs-center">
                                         <v-layout class="pt-3 mt-3 pb-5" column align-center justify-center fill-heigth>
                                             <v-img class="mb-5" :src="scdet.img" width="250" height="200"></v-img>
                                             <v-btn class="text-font1" color="blue" @click="popup=true" outline round>@{{scdet.submit}}</v-btn>
@@ -176,7 +176,7 @@
                             </v-card>
                         </v-flex>
                     </v-layout>
-                    <v-flex class="text-xs-center text-font1">Couldn't find the service you're looking for? Tell us what you want, we'll be happy to adapt our skills to your needs!</v-flex>
+                    <v-flex class="text-xs-center text-font1 pr-2">Couldn't find the service you're looking for? Tell us what you want, we'll be happy to adapt our skills to your needs!</v-flex>
                 </v-container>
                 <v-dialog v-model="popup" max-width="500" r>
                     <v-flex xs12>
@@ -575,7 +575,7 @@
                 switch (num) {
                     case 1:
                         this.scdet = {
-                            title: 'Song Writing',
+                            title: 'Songwriting',
                             details: this.services[0].details,
                             img: this.services[0].img_scr,
                             submit: 'sign up for a free consultation',
