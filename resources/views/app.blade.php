@@ -68,7 +68,7 @@
                                     </v-toolbar>
                                 </v-card-title>
                                 <v-layout :column="$vuetify.breakpoint.xsOnly" align-center justify-center row wrap>
-                                    <v-flex xs4 class="text-xs-center text-font1-subheader">Samples:
+                                    <v-flex class="text-xs-center text-font1-subheader">Samples:
                                         <template v-if='screen_type==1'>
                                                 <v-layout column wrap>
                                                     <v-template v-for="sample in scdet.samples">
@@ -110,10 +110,10 @@
                                                     <v-dialog  overflow v-model="song_popup" max-width="600" r>
                                                         <v-card style="background-color: transparent;">
                                                             <v-flex class="text-xs-center">
-                                                                <v-img src="storage/Samples/images/analysis1.png"></v-img>
+                                                                <v-img src="storage/Samples/images/analysis4.png"></v-img>
                                                                 <v-img src="storage/Samples/images/analysis2.png"></v-img>
                                                                 <v-img src="storage/Samples/images/analysis3.png"></v-img>
-                                                                <v-img src="storage/Samples/images/analysis4.png"></v-img>
+                                                                <v-img src="storage/Samples/images/analysis1.png"></v-img>
                                                             </v-flex>
                                                             <v-flex  class="text-xs-center">
                                                                 <v-btn color="blue"  @click="song_popup=false" icon>
@@ -149,8 +149,8 @@
                                                     <v-layout row wrap>
                                                         <v-list-tile-title class="text-font1" v-text="item.name"></v-list-tile-title>
                                                         <v-list-tile-subtitle>
-                                                            <v-flex class="text-font1-list-subheader">@{{item.comment}}</v-flex>
-                                                            <v-rating dense small v-model="item.rate" color="yellow darken-3" background-color="white" empty-icon="$vuetify.icons.ratingFull" half-increments readonly></v-rating>
+                                                            <v-flex xs3 class="text-font1-list-subheader">@{{item.comment}}</v-flex>
+                                                            <v-rating dense small v-model="item.rate" color="yellow darken-3" background-color="white" empty-icon="$vuetify.icons.ratingFull" readonly></v-rating>
                                                         </v-list-tile-subtitle>
                                                     </v-layout>
                                                 </v-list-tile-content>
