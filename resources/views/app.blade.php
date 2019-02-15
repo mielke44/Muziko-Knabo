@@ -176,8 +176,10 @@
                             </v-card>
                         </v-flex>
                     </v-layout>
-                    <v-flex class="text-xs-center text-font1 pr-2">Couldn't find the service you're looking for? Tell us what you want, we'll be happy to adapt our skills to your needs!</v-flex>
-                </v-container>
+                    <v-card>
+                        <v-flex class="text-xs-center text-font1 pr-2">Couldn't find the service you're looking for? Tell us what you want, we'll be happy to adapt our skills to your needs!</v-flex>
+                    </v-card>
+                    </v-container>
                 <v-dialog v-model="popup" max-width="500" r>
                     <v-flex xs12>
                         <v-card>
