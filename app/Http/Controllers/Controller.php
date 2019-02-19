@@ -24,7 +24,6 @@ class Controller extends BaseController
         $types = ['mp3','wav','mp4','au','snd','mid','rmi'];
         $file=$r->file('file');
         if(!in_array($file->getClientOriginalExtension(),$types))return json_encode(array('error'=>true,'message'=>'File extension not accepted!'));
-        
         $data = [
             'Header' => 'Update from Soir Music',
             'name' => $r['name'],
@@ -34,9 +33,7 @@ class Controller extends BaseController
             'ref_link' => $r['refs'],
         ];
         if($r['refs']=='')$data['ref_link']='No references!';
-
         $details=array('size'=>$file->getClientSize(),'MIME'=>$file->getClientMimeType(),'name'=>$file->getClientOriginalName(),'ext'=>$file->getClientOriginalExtension());
-
         $path = Storage::disk('local')->putFileAs('',$file,$file->getClientOriginalName());
         //files get uploaded to Project/Storage/app/
         print_r($details);
@@ -56,20 +53,13 @@ class Controller extends BaseController
         ];
         $rcpt = "contact.brunorios@gmail.com";
         Mail::send(new QuestionMails($data,$rcpt));
-
-        //$textBruno = $data['name']." Has asked a question: \n".$data['question']."\n\n\n Reply to:".$data['email'];
-        //$textUser = "Hello ".$r['name']."!"."\n\n We at Soir Music received your question:\n".$r['question']
-        //."\n And we already have our top experts working on it!\n In a few we will be replying you in this address with the answer!";
-        //Mail::send(new QuestionMails($data,$r['email'],$textUser));
-        //not sending mail to the user as of jan 2019; Maybe later this will be used.
-
         return json_encode(array('error'=>false, 'message'=>'Mail sent successfully to: '.$rcpt));
     }
 
     public function getRatings(Request $r){
         $service='';
         switch($r['num']){
-            case 1: $service="Song Writing";
+            case 1: $service="Songwriting";
                     break;
             case 2: $service="Production/Mixing";
                     break;
