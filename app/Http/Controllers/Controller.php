@@ -36,8 +36,6 @@ class Controller extends BaseController
         $details=array('size'=>$file->getClientSize(),'MIME'=>$file->getClientMimeType(),'name'=>$file->getClientOriginalName(),'ext'=>$file->getClientOriginalExtension());
         $path = Storage::disk('local')->putFileAs('',$file,$file->getClientOriginalName());
         //files get uploaded to Project/Storage/app/
-        print_r($details);
-        return;
         Mail::send(new AttachedMail($data,$file->getClientOriginalName(),$path));
         Storage::delete($file->getClientOriginalName());
         return json_encode(array('error'=>false, 'message'=>'Mail sent successfully!'));
