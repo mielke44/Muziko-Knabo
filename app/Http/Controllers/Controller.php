@@ -40,9 +40,11 @@ class Controller extends BaseController
         Storage::delete($file->getClientOriginalName());
         return json_encode(array('error'=>false, 'message'=>'Mail sent successfully!'));
     }
+
     public function Home(){
         return view('/app');
     }
+
     public function SubmitQuestion(Request $r){
         $data = [
             'name' => $r['name'],
@@ -72,7 +74,6 @@ class Controller extends BaseController
         }
         if(count($ratings)>0)return json_encode($ratings);
         else return json_encode('no rates');
-        
     }
 
     public function SubmitRatings(Request $r){
